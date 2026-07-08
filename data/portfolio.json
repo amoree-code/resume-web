@@ -1,0 +1,115 @@
+{
+  "stats": [
+    { "num": "3+", "label": "years experience" },
+    { "num": "1.5M+", "label": "records managed" },
+    { "num": "10+", "label": "platforms shipped" },
+    { "num": "500K+", "label": "users served" }
+  ],
+  "skillGroups": [
+    {
+      "label": "Languages",
+      "items": ["HTML", "CSS", "JavaScript", "TypeScript"]
+    },
+    {
+      "label": "Front-end",
+      "items": [
+        "React.js",
+        "Next.js",
+        "Vue.js",
+        "Redux Toolkit",
+        "Framer Motion"
+      ]
+    },
+    {
+      "label": "UI Libraries",
+      "items": ["Tailwind CSS", "Shadcn", "Mantine UI", "Hero UI"]
+    },
+    {
+      "label": "Back-end & Data",
+      "items": [
+        "Node.js",
+        "Nest.js",
+        "Express",
+        "Prisma",
+        "PostgreSQL",
+        "MongoDB"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "idx": "PRJ-01",
+      "title": "Technical Support System",
+      "category": "SaaS",
+      "desc": "Embedded live-chat SaaS integrated into 10+ platforms — WebSocket real-time chat, bot self-service, full ticketing, 4-language localization and themeable UI.",
+      "tags": ["WebSocket", "Material 3", "i18n"]
+    },
+    {
+      "idx": "PRJ-02",
+      "title": "Dashboard Entrepreneurship",
+      "category": "Gov",
+      "desc": "Control panel for the Ministry of Higher Education managing 1.5M+ student and project records with role-based access for 50+ user roles.",
+      "tags": ["Next.js", "RBAC", "Scale"]
+    },
+    {
+      "idx": "PRJ-03",
+      "title": "Dashboard Riyada",
+      "category": "Gov",
+      "desc": "Admin panel for the Entrepreneurship Directorate managing 500,000+ users with fine-grained permissions across 15+ levels.",
+      "tags": ["React", "Permissions"]
+    },
+    {
+      "idx": "PRJ-04",
+      "title": "Archive Documents",
+      "category": "Gov",
+      "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer/exporter records, dual manager/employee panels, fast search.",
+      "tags": ["Search", "8 tiers"]
+    },
+    {
+      "idx": "PRJ-05",
+      "title": "Hospital System",
+      "category": "Product",
+      "desc": "Room-scanning and inventory tracking across 200+ rooms with real-time availability and role-based access for 15+ departments.",
+      "tags": ["Realtime", "Inventory"]
+    },
+    {
+      "idx": "PRJ-06",
+      "title": "Electronic Voting Dashboard",
+      "category": "Product",
+      "desc": "Integrated voting + reporting panel at the scale of tens of thousands of voters, real-time results, and 15+ customizable reports.",
+      "tags": ["Realtime", "Analytics"]
+    }
+  ],
+  "experience": [
+    {
+      "company": "StarSphere",
+      "role": "Front-end Developer",
+      "dates": "Sep 2025 – Present",
+      "points": [
+        "Build and maintain responsive web apps with React and Next.js",
+        "Implement pixel-perfect UI with designers; improved load time 40% via optimization and lazy loading",
+        "Ensure cross-browser compatibility and mobile-first responsive design"
+      ]
+    },
+    {
+      "company": "Lightring Technology",
+      "role": "Front-end Developer",
+      "dates": "Jul 2025 – Aug 2025",
+      "points": [
+        "Developed reusable React components for internal dashboard systems",
+        "Integrated RESTful APIs and managed state with Redux Toolkit",
+        "Delivered 5+ projects on tight deadlines while maintaining code quality"
+      ]
+    },
+    {
+      "company": "The Golden Castle",
+      "role": "Front-end Developer",
+      "dates": "Feb 2025 – Jul 2025",
+      "points": [
+        "Built interactive UIs with React and Tailwind CSS, mobile-first across all sizes",
+        "Conducted code reviews and mentored 3 junior developers",
+        "Improved performance and SEO through optimization and best practices"
+      ]
+    }
+  ]
+}
