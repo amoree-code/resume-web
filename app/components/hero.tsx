@@ -1,212 +1,261 @@
-import HeroReveal from "./hero-reveal";
-import CubeSceneLazy from "./cube-scene-lazy";
-import Reveal from "./reveal";
-import type { Stat } from "@/lib/portfolio";
+import HeroEnter from './hero-enter';
+import CvDownloadButton from './cv-download-button';
+import Image from 'next/image';
+import { CONTACT_LINKS } from '@/lib/contact';
 
-export default function Hero({ stats }: { stats: Stat[] }) {
+const HERO_LINKS = CONTACT_LINKS.filter((l) => l.label !== 'Phone');
+
+const TEXT_SHADOW = '0 2px 6px rgba(0,0,0,.85), 0 6px 26px rgba(0,0,0,.65)';
+
+export default function Hero() {
   return (
     <section
       id="top"
       style={{
-        position: "relative",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px 24px 32px',
+        minHeight: '80vh',
       }}
     >
-      <div style={{ position: "relative", width: "100%" }}>
-      <HeroReveal>
+      <HeroEnter>
         <div
+          data-enter-image
           style={{
-            width: "100%",
-            maxWidth: 1120,
-            margin: "0 auto",
-            padding: "80px 24px 60px",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
-            gap: 40,
-            alignItems: "center",
+            width: 'min(88vw, calc(86vh * 1.75), 1420px)',
+            aspectRatio: '1344 / 768',
+            position: 'relative',
+            borderRadius: 20,
+            overflow: 'hidden',
+            animation: 'heroImageFloat 5s ease-in-out infinite alternate',
           }}
+          className="hero-image-frame"
         >
-          <div style={{ textAlign: "center" }}>
-            <div
-              data-hero-item
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                fontSize: 12,
-                color: "var(--muted)",
-                border: "1px solid var(--border)",
-                borderRadius: 999,
-                padding: "6px 14px",
-                marginBottom: 26,
-              }}
-            >
-              <span
-                style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: "50%",
-                  background: "#28c840",
-                }}
-              />
-              Available for work · Front-end Specialist
-            </div>
-            <h1
-              data-hero-item
-              style={{
-                fontFamily: "var(--font-merienda), cursive",
-                fontWeight: 900,
-                fontSize: 60,
-                lineHeight: 1.05,
-                margin: "0 0 20px",
-                letterSpacing: "-.5px",
-              }}
-            >
-              Amir Abdulkarim
-              <br />
-              <span style={{ color: "var(--accent)" }}>Jabbar</span>
-            </h1>
-            <p
-              data-hero-item
-              style={{
-                fontSize: 15,
-                color: "var(--muted)",
-                maxWidth: 520,
-                lineHeight: 1.7,
-                margin: "0 auto 32px",
-              }}
-            >
-              Front-end-focused Full Stack Developer with 3 years of
-              experience turning ideas and designs into clean, fast,
-              dependable web products — from large-scale government
-              dashboards to real-time SaaS used by hundreds of thousands.
-            </p>
-            <div
-              data-hero-item
-              style={{
-                display: "flex",
-                gap: 14,
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              <a
-                href="#work"
-                style={{
-                  background: "color-mix(in srgb, var(--accent) 80%, black)",
-                  color: "#fff",
-                  padding: "13px 24px",
-                  borderRadius: 10,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  textDecoration: "none",
-                }}
-              >
-                View work →
-              </a>
-              <a
-                href="#contact"
-                style={{
-                  border: "1px solid var(--border)",
-                  color: "var(--fg)",
-                  padding: "13px 24px",
-                  borderRadius: 10,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  textDecoration: "none",
-                }}
-              >
-                Get in touch
-              </a>
-            </div>
-          </div>
-
-          {/* 3D cube visual */}
-          <div
-            data-hero-item
-            aria-hidden="true"
+          <Image
+            src="/gaming-room.jpg"
+            alt="Moody, red-lit gaming setup at night"
+            width={1344}
+            height={768}
+            priority
             style={{
-              position: "relative",
-              width: "min(420px, 100%)",
-              maxHeight: 480,
-              aspectRatio: "1 / 1",
-              margin: "0 auto",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+          {/* dark scrim for legibility, keeps the photo's own blacks intact */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'rgba(8,6,12,.32)',
+            }}
+          />
+
+          {/* chaotic scattered headline, no background boxes, straight on the photo */}
+          <div
+            data-enter
+            data-enter-from="left"
+            data-enter-rotate="-3"
+            style={{
+              position: 'absolute',
+              top: '6%',
+              left: '5%',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              fontSize: 12,
+              color: '#fff',
+              border: '1px solid rgba(255,255,255,.4)',
+              borderRadius: 999,
+              padding: '6px 14px',
+              textShadow: TEXT_SHADOW,
+              transform: 'rotate(-3deg)',
             }}
           >
-            <div
+            <span
               style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, color-mix(in srgb, var(--accent) 30%, transparent), transparent 62%)",
-                filter: "blur(18px)",
-                animation: "glowpulse 6s ease-in-out infinite",
+                width: 7,
+                height: 7,
+                borderRadius: '50%',
+                background: '#28c840',
               }}
             />
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                animation: "floaty 7s ease-in-out infinite",
-              }}
-            >
-              <CubeSceneLazy />
-            </div>
+            Available for work
           </div>
-        </div>
-      </HeroReveal>
 
-      <Reveal>
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 1120,
-            margin: "40px auto 0",
-            padding: "0 24px",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(140px, 100%), 1fr))",
-            gap: 16,
-          }}
-        >
-          {stats.map((s) => (
-            <div
-              key={s.label}
+          <h1
+            data-enter
+            data-enter-from="top"
+            data-enter-rotate="-2"
+            style={{
+              position: 'absolute',
+              top: '16%',
+              left: '7%',
+              fontFamily: 'var(--font-merienda), cursive',
+              fontWeight: 900,
+              fontSize: 'clamp(22px, 4vw, 40px)',
+              lineHeight: 1.05,
+              margin: 0,
+              letterSpacing: '-.5px',
+              color: '#fff',
+              textShadow: TEXT_SHADOW,
+              transform: 'rotate(-2deg)',
+            }}
+          >
+            Code by day
+          </h1>
+
+          <div
+            data-enter
+            data-enter-from="bottom"
+            data-enter-rotate="3"
+            style={{
+              position: 'absolute',
+              top: '32%',
+              right: '6%',
+              fontFamily: 'var(--font-merienda), cursive',
+              fontWeight: 900,
+              fontSize: 'clamp(22px, 4vw, 40px)',
+              lineHeight: 1.05,
+              color: 'var(--accent)',
+              textShadow: TEXT_SHADOW,
+              transform: 'rotate(3deg)',
+              textAlign: 'right',
+            }}
+          >
+            Ship by night
+          </div>
+
+          <p
+            data-enter
+            data-enter-from="left"
+            data-enter-rotate="1"
+            style={{
+              position: 'absolute',
+              bottom: '34%',
+              left: '6%',
+              maxWidth: 280,
+              fontSize: 14,
+              lineHeight: 1.7,
+              color: '#fff',
+              textShadow: TEXT_SHADOW,
+              transform: 'rotate(1deg)',
+              margin: 0,
+            }}
+          >
+            Amir Abdulkarim Jabbar. Front-end-focused Full Stack Developer
+            turning ideas into clean, fast, dependable web products.
+          </p>
+
+          <div
+            data-enter
+            data-enter-from="scale"
+            data-enter-rotate="-1"
+            style={{
+              position: 'absolute',
+              bottom: '20%',
+              right: '6%',
+              display: 'flex',
+              gap: 14,
+              flexWrap: 'wrap',
+              justifyContent: 'flex-end',
+              transform: 'rotate(-1deg)',
+            }}
+          >
+            <a
+              href="#work"
               style={{
-                border: "1px solid var(--border)",
-                borderRadius: 12,
-                background: "var(--panel)",
-                padding: 22,
+                background: 'color-mix(in srgb, var(--accent) 80%, black)',
+                color: '#fff',
+                padding: '13px 24px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: 700,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                textDecoration: 'none',
               }}
             >
-              <div
+              View work →
+            </a>
+            <a
+              href="#contact"
+              style={{
+                border: '1px solid rgba(255,255,255,.4)',
+                color: '#fff',
+                padding: '13px 24px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: 700,
+                textDecoration: 'none',
+                textShadow: TEXT_SHADOW,
+              }}
+            >
+              Get in touch
+            </a>
+          </div>
+
+          <div
+            data-enter
+            data-enter-from="right"
+            style={{ position: 'absolute', top: 16, right: 16 }}
+          >
+            <CvDownloadButton />
+          </div>
+
+          <nav
+            aria-label="Social links"
+            className="hero-social-nav"
+            style={{
+              position: 'absolute',
+              inset: 'auto 0 0 0',
+              padding: '0 20px 22px',
+              display: 'flex',
+              gap: 14,
+            }}
+          >
+            {HERO_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                aria-label={link.label}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                 style={{
-                  fontFamily: "var(--font-merienda), cursive",
-                  fontWeight: 700,
-                  fontSize: 30,
-                  color: "var(--accent)",
+                  width: 38,
+                  height: 38,
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(255,255,255,.3)',
+                  background: 'rgba(255,255,255,.06)',
+                  backdropFilter: 'blur(6px)',
+                  color: '#fff',
+                  transition:
+                    'box-shadow .2s, border-color .2s, color .2s, transform .2s',
                 }}
+                className="hero-social-btn"
               >
-                {s.num}
-              </div>
-              <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>
-                {s.label}
-              </div>
-            </div>
-          ))}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d={link.iconPath} />
+                </svg>
+              </a>
+            ))}
+          </nav>
         </div>
-      </Reveal>
-      </div>
+      </HeroEnter>
     </section>
   );
 }

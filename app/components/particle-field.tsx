@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 type Particle = {
   x: number;
@@ -12,7 +12,7 @@ type Particle = {
 
 const PARTICLE_COUNT = 60;
 const LINK_DIST = 120;
-const DOT_COLOR = "138, 180, 248"; // Google Material dark-theme blue #8ab4f8
+const DOT_COLOR = '217, 119, 87'; // brand accent #D97757
 
 export default function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,11 +20,11 @@ export default function ParticleField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      '(prefers-reduced-motion: reduce)',
     ).matches;
 
     let width = 0;
@@ -47,9 +47,9 @@ export default function ParticleField() {
       particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.6 + 1,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: -Math.random() * 0.35 - 0.05,
+        r: Math.random() * 2.2 + 0.8,
       }));
     };
 
@@ -80,7 +80,11 @@ export default function ParticleField() {
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
+        if (p.y < -10) {
+          // ember drifted off the top, respawn rising from the bottom
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
 
         const dx = p.x - pointer.x;
         const dy = p.y - pointer.y;
@@ -91,10 +95,14 @@ export default function ParticleField() {
           p.y += (dy / (dist || 1)) * force * 1.2;
         }
 
+        ctx.save();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = `rgba(${DOT_COLOR}, 0.9)`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${DOT_COLOR}, 0.7)`;
+        ctx.fillStyle = `rgba(${DOT_COLOR}, 0.85)`;
         ctx.fill();
+        ctx.restore();
       }
 
       for (let i = 0; i < particles.length; i++) {
@@ -122,8 +130,8 @@ export default function ParticleField() {
     if (reduceMotion) {
       drawStatic();
     } else {
-      window.addEventListener("pointermove", onPointerMove);
-      window.addEventListener("pointerleave", onPointerLeave);
+      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerleave', onPointerLeave);
       rafId = requestAnimationFrame(tick);
     }
 
@@ -132,13 +140,13 @@ export default function ParticleField() {
       seed();
       if (reduceMotion) drawStatic();
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
 
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerleave', onPointerLeave);
     };
   }, []);
 
@@ -147,11 +155,11 @@ export default function ParticleField() {
       ref={canvasRef}
       aria-hidden="true"
       style={{
-        position: "absolute",
+        position: 'absolute',
         inset: 0,
-        width: "100%",
-        height: "100%",
-        display: "block",
+        width: '100%',
+        height: '100%',
+        display: 'block',
       }}
     />
   );

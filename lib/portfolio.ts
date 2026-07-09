@@ -18,6 +18,7 @@ export type Experience = {
 
 export type PortfolioData = {
   stats: Stat[];
+  services: string[];
   skillGroups: SkillGroup[];
   projects: Project[];
   experience: Experience[];

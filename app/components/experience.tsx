@@ -14,20 +14,20 @@ export default function Experience({
   experience: ExperienceItem[];
 }) {
   const listRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
+  const trunkRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!listRef.current || !lineRef.current) return;
+    if (!listRef.current || !trunkRef.current) return;
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (reduceMotion) {
-      gsap.set(lineRef.current, { scaleY: 1 });
+      gsap.set(trunkRef.current, { scaleY: 1 });
       return;
     }
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        lineRef.current,
+        trunkRef.current,
         { scaleY: 0 },
         {
           scaleY: 1,
@@ -67,7 +67,6 @@ export default function Experience({
             marginBottom: 30,
           }}
         >
-          <span style={{ color: "var(--accent)", fontSize: 14 }}>03</span>
           <h2
             style={{
               fontFamily: "var(--font-merienda), cursive",
@@ -81,76 +80,59 @@ export default function Experience({
           <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
         </div>
       </Reveal>
-      <div
-        ref={listRef}
-        style={{ display: "flex", flexDirection: "column", position: "relative" }}
-      >
-        <div
-          ref={lineRef}
-          style={{
-            position: "absolute",
-            left: 182,
-            top: 0,
-            bottom: 0,
-            width: 2,
-            background: "var(--accent)",
-            opacity: 0.4,
-            transformOrigin: "top",
-          }}
-        />
-        {experience.map((e, i) => (
-          <Reveal key={e.company} delayMs={Math.min(i, 4) * 60}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "170px 1fr",
-                gap: 24,
-                padding: "22px 0",
-                borderTop: "1px solid var(--border)",
-              }}
-            >
-              <div style={{ fontSize: 12, color: "var(--faint)" }}>
+      <div ref={listRef} style={{ position: "relative" }}>
+        <div ref={trunkRef} className="tree-trunk" />
+        {experience.map((e, i) => {
+          const isLeft = i % 2 === 0;
+          const card = (
+            <div className="tree-card">
+              <div style={{ fontSize: 12, color: "var(--faint)", marginBottom: 6 }}>
                 {e.dates}
               </div>
-              <div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "200px 1fr",
-                    gap: 10,
-                    marginBottom: 6,
-                  }}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 10,
+                  marginBottom: 6,
+                }}
+              >
+                <span
+                  style={{ fontSize: 16, fontWeight: 700, color: "var(--fg)" }}
                 >
-                  <span
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: "var(--fg)",
-                    }}
-                  >
-                    {e.company}
-                  </span>
-                  <span style={{ fontSize: 16, color: "var(--accent)" }}>
-                    {e.role}
-                  </span>
-                </div>
-                <ul
-                  style={{
-                    margin: 0,
-                    paddingLeft: 18,
-                    fontSize: 12.5,
-                    color: "var(--muted)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {e.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
-                  ))}
-                </ul>
+                  {e.company}
+                </span>
+                <span style={{ fontSize: 16, color: "var(--accent)" }}>
+                  {e.role}
+                </span>
               </div>
+              <ul
+                style={{
+                  margin: 0,
+                  paddingLeft: 18,
+                  fontSize: 12.5,
+                  color: "var(--muted)",
+                  lineHeight: 1.7,
+                }}
+              >
+                {e.points.map((pt) => (
+                  <li key={pt}>{pt}</li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
-        ))}
+          );
+          return (
+            <Reveal key={e.company} delayMs={Math.min(i, 4) * 60}>
+              <div className="tree-row">
+                <div className="tree-cell-left">{isLeft ? card : null}</div>
+                <div className="tree-cell-node">
+                  <span className="tree-node" />
+                </div>
+                <div className="tree-cell-right">{!isLeft ? card : null}</div>
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );

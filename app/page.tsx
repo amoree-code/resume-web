@@ -1,7 +1,8 @@
 import Header from './components/header';
 import Hero from './components/hero';
 import About from './components/about';
-import Workspace from './components/workspace';
+import Marquee from './components/marquee';
+import SectionIndicator from './components/section-indicator';
 import Work from './components/work';
 import Experience from './components/experience';
 import Contact from './components/contact';
@@ -20,7 +21,7 @@ const personJsonLd = {
 };
 
 export default function Home() {
-  const { stats, skillGroups, projects, experience } = getPortfolioData();
+  const { skillGroups, services, projects, experience } = getPortfolioData();
 
   return (
     <div style={{ minHeight: '100vh', overflowX: 'hidden' }}>
@@ -28,10 +29,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
+      <SectionIndicator />
       <Header />
-      <Hero stats={stats} />
-      <About skillGroups={skillGroups} />
-      <Workspace />
+      <Hero />
+      <About skillGroups={skillGroups} services={services} />
+      <Marquee items={services} />
       <Work projects={projects} />
       <Experience experience={experience} />
       <Contact />

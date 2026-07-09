@@ -1,19 +1,61 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "./reveal";
 import type { Project } from "@/lib/portfolio";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Work({ projects }: { projects: Project[] }) {
   const reduceMotion = useReducedMotion();
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!listRef.current) return;
+    const reduceMotionMq = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const ctx = gsap.context(() => {
+      const rows = gsap.utils.toArray<HTMLElement>(".proj-row");
+      rows.forEach((row) => {
+        const num = row.querySelector(".proj-num");
+        const content = row.querySelector(".proj-content");
+        if (!num || !content) return;
+        if (reduceMotionMq) {
+          gsap.set([num, content], { opacity: 1, x: 0, scale: 1 });
+          return;
+        }
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          })
+          .fromTo(
+            num,
+            { opacity: 0, scale: 0.6, x: -20 },
+            { opacity: 1, scale: 1, x: 0, duration: 0.5, ease: "back.out(1.7)" }
+          )
+          .fromTo(
+            content,
+            { opacity: 0, x: 40 },
+            { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
+            "-=0.3"
+          );
+      });
+    }, listRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       id="work"
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
         maxWidth: 1120,
         margin: "0 auto",
         padding: "30px 24px 70px",
@@ -28,7 +70,6 @@ export default function Work({ projects }: { projects: Project[] }) {
             marginBottom: 26,
           }}
         >
-          <span style={{ color: "var(--accent)", fontSize: 14 }}>02</span>
           <h2
             style={{
               fontFamily: "var(--font-merienda), cursive",
@@ -45,42 +86,24 @@ export default function Work({ projects }: { projects: Project[] }) {
           </span>
         </div>
       </Reveal>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
-          gap: 18,
-        }}
-      >
+      <div ref={listRef}>
         {projects.map((p, i) => (
-          <Reveal key={p.idx} delayMs={Math.min(i, 4) * 60}>
-            <motion.div
-              className="project-card"
-              style={{
-                border: "1px solid var(--border)",
-                borderRadius: 14,
-                background: "var(--panel)",
-                padding: 24,
-                display: "flex",
-                flexDirection: "column",
-                gap: 12,
-                height: "100%",
-              }}
-              whileHover={
-                reduceMotion ? undefined : { y: -6, scale: 1.015 }
-              }
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
+          <motion.div
+            key={p.idx}
+            className="proj-row"
+            whileHover={reduceMotion ? undefined : { y: -4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <div className="proj-num">{String(i + 1).padStart(2, "0")}</div>
+            <div className="proj-content">
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
+                  gap: 10,
+                  marginBottom: 8,
                 }}
               >
-                <span style={{ fontSize: 11, color: "var(--faint)" }}>
-                  {p.idx}
-                </span>
                 <span
                   style={{
                     fontSize: 11,
@@ -93,13 +116,16 @@ export default function Work({ projects }: { projects: Project[] }) {
                 >
                   {p.category}
                 </span>
+                <span style={{ fontSize: 11, color: "var(--faint)" }}>
+                  {p.idx}
+                </span>
               </div>
               <h3
                 style={{
                   fontFamily: "var(--font-merienda), cursive",
                   fontWeight: 700,
-                  fontSize: 19,
-                  margin: 0,
+                  fontSize: 20,
+                  margin: "0 0 8px",
                   color: "var(--fg)",
                 }}
               >
@@ -107,17 +133,34 @@ export default function Work({ projects }: { projects: Project[] }) {
               </h3>
               <p
                 style={{
-                  fontSize: 12.5,
+                  fontSize: 13,
                   color: "var(--muted)",
-                  lineHeight: 1.65,
-                  margin: 0,
-                  flex: 1,
+                  lineHeight: 1.7,
+                  margin: "0 0 12px",
+                  maxWidth: 640,
                 }}
               >
                 {p.desc}
               </p>
-            </motion.div>
-          </Reveal>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {p.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontSize: 11,
+                      border: "1px solid var(--border)",
+                      background: "var(--panel)",
+                      borderRadius: 8,
+                      padding: "5px 10px",
+                      color: "var(--fg)",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
       <Reveal>

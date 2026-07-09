@@ -4,20 +4,27 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "./reveal";
+import Workspace from "./workspace";
 import type { SkillGroup } from "@/lib/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
-  const groupsRef = useRef<HTMLDivElement>(null);
+export default function About({
+  skillGroups,
+  services,
+}: {
+  skillGroups: SkillGroup[];
+  services: string[];
+}) {
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!groupsRef.current) return;
+    if (!bodyRef.current) return;
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(".skill-group");
+      const items = gsap.utils.toArray<HTMLElement>(".stagger-item");
       if (reduceMotion) {
         gsap.set(items, { opacity: 1, scale: 1 });
         return;
@@ -25,7 +32,7 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
       gsap
         .timeline({
           scrollTrigger: {
-            trigger: groupsRef.current,
+            trigger: bodyRef.current,
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
@@ -41,7 +48,7 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
             stagger: 0.08,
           }
         );
-    }, groupsRef);
+    }, bodyRef);
     return () => ctx.revert();
   }, []);
 
@@ -49,13 +56,9 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
     <section
       id="about"
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
         maxWidth: 1120,
         margin: "0 auto",
-        padding: "30px 24px 70px",
+        padding: "110px 24px 70px",
       }}
     >
       <Reveal>
@@ -67,7 +70,6 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
             marginBottom: 30,
           }}
         >
-          <span style={{ color: "var(--accent)", fontSize: 14 }}>01</span>
           <h2
             style={{
               fontFamily: "var(--font-merienda), cursive",
@@ -76,47 +78,91 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
               margin: 0,
             }}
           >
-            About &amp; stack
+            What I do
           </h2>
           <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
         </div>
       </Reveal>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(360px, 100%), 1fr))",
-          gap: 44,
-          alignItems: "end",
-        }}
-      >
-        <Reveal>
-          <div style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-            <p style={{ margin: "0 0 16px" }}>
-              I care about interfaces that feel effortless — clean, fast, and
-              easy to use. I&apos;m just as comfortable working across the
-              full stack, taking a product from idea to something real people
-              use.
-            </p>
-            <p style={{ margin: 0 }}>
-              I&apos;ve built large-scale government platforms handling{" "}
-              <span style={{ color: "var(--fg)" }}>1.5M+ records</span>,
-              embedded SaaS products used across{" "}
-              <span style={{ color: "var(--fg)" }}>
-                10+ production platforms
+
+      <Reveal>
+        <div
+          style={{
+            fontSize: 14,
+            color: "var(--muted)",
+            lineHeight: 1.85,
+            maxWidth: 720,
+            marginBottom: 40,
+          }}
+        >
+          <p style={{ margin: "0 0 16px" }}>
+            I care about interfaces that feel effortless — clean, fast, and
+            easy to use. I&apos;m just as comfortable working across the full
+            stack, taking a product from idea to something real people use.
+          </p>
+          <p style={{ margin: 0 }}>
+            I&apos;ve built large-scale government platforms handling{" "}
+            <span style={{ color: "var(--fg)" }}>1.5M+ records</span>,
+            embedded SaaS products used across{" "}
+            <span style={{ color: "var(--fg)" }}>
+              10+ production platforms
+            </span>
+            , and real-time systems serving hundreds of thousands of people.
+            I focus on writing code that performs well and that a team can
+            actually maintain and grow.
+          </p>
+        </div>
+      </Reveal>
+
+      <div ref={bodyRef}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
+            gap: 14,
+            marginBottom: 48,
+          }}
+        >
+          {services.map((service) => (
+            <div
+              key={service}
+              className="stagger-item"
+              style={{
+                border: "1px solid var(--border)",
+                background: "var(--panel)",
+                borderRadius: 14,
+                padding: "20px 18px",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: 2,
+                  background: "var(--accent)",
+                  flexShrink: 0,
+                }}
+              />
+              <span style={{ fontSize: 13.5, fontWeight: 700, color: "var(--fg)" }}>
+                {service}
               </span>
-              , and real-time systems serving hundreds of thousands of
-              people. I focus on writing code that performs well and that a
-              team can actually maintain and grow.
-            </p>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div
-            ref={groupsRef}
-            style={{ display: "flex", flexDirection: "column", gap: 18 }}
-          >
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(360px, 100%), 1fr))",
+            gap: 44,
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             {skillGroups.map((g) => (
-              <div key={g.label} className="skill-group">
+              <div key={g.label} className="skill-group stagger-item">
                 <div
                   style={{
                     fontSize: 11,
@@ -148,7 +194,8 @@ export default function About({ skillGroups }: { skillGroups: SkillGroup[] }) {
               </div>
             ))}
           </div>
-        </Reveal>
+          <Workspace />
+        </div>
       </div>
     </section>
   );
