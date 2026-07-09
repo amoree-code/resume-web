@@ -1,6 +1,7 @@
 import portfolioData from '@/data/portfolio.json';
 
 export type Stat = { num: string; label: string };
+export type Service = { title: string; description: string };
 export type SkillGroup = { label: string; items: string[] };
 export type Project = {
   idx: string;
@@ -18,7 +19,7 @@ export type Experience = {
 
 export type PortfolioData = {
   stats: Stat[];
-  services: string[];
+  services: Service[];
   skillGroups: SkillGroup[];
   projects: Project[];
   experience: Experience[];

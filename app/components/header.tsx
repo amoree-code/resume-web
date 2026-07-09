@@ -52,9 +52,6 @@ export default function Header() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        backdropFilter: "blur(12px)",
-        background: "color-mix(in srgb, var(--bg) 78%, transparent)",
-        borderBottom: "1px solid var(--border)",
       }}
     >
       <div

@@ -1,54 +1,55 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "./reveal";
-import Workspace from "./workspace";
-import type { SkillGroup } from "@/lib/portfolio";
+import type { Service } from "@/lib/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About({
-  skillGroups,
-  services,
-}: {
-  skillGroups: SkillGroup[];
-  services: string[];
-}) {
-  const bodyRef = useRef<HTMLDivElement>(null);
+export default function About({ services }: { services: Service[] }) {
+  const reduceMotion = useReducedMotion();
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!bodyRef.current) return;
-    const reduceMotion = window.matchMedia(
+    if (!listRef.current) return;
+    const reduceMotionMq = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(".stagger-item");
-      if (reduceMotion) {
-        gsap.set(items, { opacity: 1, scale: 1 });
-        return;
-      }
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: bodyRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        })
-        .fromTo(
-          items,
-          { opacity: 0, scale: 0.9 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out",
-            stagger: 0.08,
-          }
-        );
-    }, bodyRef);
+      const rows = gsap.utils.toArray<HTMLElement>(".service-row");
+      rows.forEach((row) => {
+        const num = row.querySelector(".service-num");
+        const content = row.querySelector(".service-content");
+        if (!num || !content) return;
+        if (reduceMotionMq) {
+          gsap.set([num, content], { opacity: 1, x: 0, scale: 1 });
+          return;
+        }
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 75%",
+              end: "top 35%",
+              scrub: 0.6,
+            },
+          })
+          .fromTo(
+            num,
+            { opacity: 0, scale: 0.6, x: -20 },
+            { opacity: 1, scale: 1, x: 0, ease: "power2.out" }
+          )
+          .fromTo(
+            content,
+            { opacity: 0, x: 40 },
+            { opacity: 1, x: 0, ease: "power2.out" },
+            "<"
+          );
+      });
+    }, listRef);
     return () => ctx.revert();
   }, []);
 
@@ -113,89 +114,55 @@ export default function About({
         </div>
       </Reveal>
 
-      <div ref={bodyRef}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
-            gap: 14,
-            marginBottom: 48,
-          }}
-        >
-          {services.map((service) => (
+      <div ref={listRef}>
+        {services.map((service, i) => (
+          <motion.div
+            key={service.title}
+            className="service-row"
+            style={{
+              minHeight: "48vh",
+              borderTop: i === 0 ? "none" : "1px solid var(--border)",
+            }}
+            whileHover={reduceMotion ? undefined : { x: 6 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
             <div
-              key={service}
-              className="stagger-item"
+              className="service-num"
               style={{
-                border: "1px solid var(--border)",
-                background: "var(--panel)",
-                borderRadius: 14,
-                padding: "20px 18px",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
+                fontFamily: "var(--font-merienda), cursive",
+                fontSize: 48,
+                fontWeight: 700,
+                color: "var(--accent)",
               }}
             >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: 2,
-                  background: "var(--accent)",
-                  flexShrink: 0,
-                }}
-              />
-              <span style={{ fontSize: 13.5, fontWeight: 700, color: "var(--fg)" }}>
-                {service}
-              </span>
+              {String(i + 1).padStart(2, "0")}
             </div>
-          ))}
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(360px, 100%), 1fr))",
-            gap: 44,
-            alignItems: "center",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            {skillGroups.map((g) => (
-              <div key={g.label} className="skill-group stagger-item">
-                <div
-                  style={{
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "1.5px",
-                    color: "var(--faint)",
-                    marginBottom: 10,
-                  }}
-                >
-                  {g.label}
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {g.items.map((sk) => (
-                    <span
-                      key={sk}
-                      style={{
-                        fontSize: 12,
-                        border: "1px solid var(--border)",
-                        background: "var(--panel)",
-                        borderRadius: 8,
-                        padding: "7px 12px",
-                        color: "var(--fg)",
-                      }}
-                    >
-                      {sk}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <Workspace />
-        </div>
+            <div className="service-content">
+              <h3
+                style={{
+                  fontFamily: "var(--font-merienda), cursive",
+                  fontWeight: 700,
+                  fontSize: 26,
+                  margin: "0 0 12px",
+                  color: "var(--fg)",
+                }}
+              >
+                {service.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--muted)",
+                  lineHeight: 1.8,
+                  maxWidth: 620,
+                  margin: 0,
+                }}
+              >
+                {service.description}
+              </p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

@@ -23,47 +23,40 @@ export default function Hero() {
       <HeroEnter>
         <div
           data-enter-image
-          style={{
-            width: 'min(88vw, calc(86vh * 1.75), 1420px)',
-            aspectRatio: '1344 / 768',
-            position: 'relative',
-            borderRadius: 20,
-            overflow: 'hidden',
-            animation: 'heroImageFloat 5s ease-in-out infinite alternate',
-          }}
           className="hero-image-frame"
         >
-          <Image
-            src="/gaming-room.jpg"
-            alt="Moody, red-lit gaming setup at night"
-            width={1344}
-            height={768}
-            priority
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-          />
-          {/* dark scrim for legibility, keeps the photo's own blacks intact */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'rgba(8,6,12,.32)',
-            }}
-          />
+          <div className="hero-photo">
+            <Image
+              src="/gaming-room.jpg"
+              alt="Moody, red-lit gaming setup at night"
+              width={1344}
+              height={768}
+              priority
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+            {/* dark scrim for legibility, keeps the photo's own blacks intact */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(8,6,12,.32)',
+              }}
+            />
+          </div>
 
-          {/* chaotic scattered headline, no background boxes, straight on the photo */}
+          <div className="hero-content">
+          {/* chaotic scattered headline on desktop; stacks in normal flow on mobile */}
           <div
             data-enter
             data-enter-from="left"
             data-enter-rotate="-3"
+            className="hero-el hero-badge"
             style={{
-              position: 'absolute',
-              top: '6%',
-              left: '5%',
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
@@ -73,7 +66,6 @@ export default function Hero() {
               borderRadius: 999,
               padding: '6px 14px',
               textShadow: TEXT_SHADOW,
-              transform: 'rotate(-3deg)',
             }}
           >
             <span
@@ -91,10 +83,8 @@ export default function Hero() {
             data-enter
             data-enter-from="top"
             data-enter-rotate="-2"
+            className="hero-el hero-title-1"
             style={{
-              position: 'absolute',
-              top: '16%',
-              left: '7%',
               fontFamily: 'var(--font-merienda), cursive',
               fontWeight: 900,
               fontSize: 'clamp(22px, 4vw, 40px)',
@@ -103,7 +93,6 @@ export default function Hero() {
               letterSpacing: '-.5px',
               color: '#fff',
               textShadow: TEXT_SHADOW,
-              transform: 'rotate(-2deg)',
             }}
           >
             Code by day
@@ -113,18 +102,14 @@ export default function Hero() {
             data-enter
             data-enter-from="bottom"
             data-enter-rotate="3"
+            className="hero-el hero-title-2"
             style={{
-              position: 'absolute',
-              top: '32%',
-              right: '6%',
               fontFamily: 'var(--font-merienda), cursive',
               fontWeight: 900,
               fontSize: 'clamp(22px, 4vw, 40px)',
               lineHeight: 1.05,
               color: 'var(--accent)',
               textShadow: TEXT_SHADOW,
-              transform: 'rotate(3deg)',
-              textAlign: 'right',
             }}
           >
             Ship by night
@@ -134,16 +119,12 @@ export default function Hero() {
             data-enter
             data-enter-from="left"
             data-enter-rotate="1"
+            className="hero-el hero-desc"
             style={{
-              position: 'absolute',
-              bottom: '34%',
-              left: '6%',
-              maxWidth: 280,
               fontSize: 14,
               lineHeight: 1.7,
               color: '#fff',
               textShadow: TEXT_SHADOW,
-              transform: 'rotate(1deg)',
               margin: 0,
             }}
           >
@@ -155,15 +136,11 @@ export default function Hero() {
             data-enter
             data-enter-from="scale"
             data-enter-rotate="-1"
+            className="hero-el hero-ctas"
             style={{
-              position: 'absolute',
-              bottom: '20%',
-              right: '6%',
               display: 'flex',
               gap: 14,
               flexWrap: 'wrap',
-              justifyContent: 'flex-end',
-              transform: 'rotate(-1deg)',
             }}
           >
             <a
@@ -203,18 +180,15 @@ export default function Hero() {
           <div
             data-enter
             data-enter-from="right"
-            style={{ position: 'absolute', top: 16, right: 16 }}
+            className="hero-el hero-cv"
           >
             <CvDownloadButton />
           </div>
 
           <nav
             aria-label="Social links"
-            className="hero-social-nav"
+            className="hero-el hero-social-nav"
             style={{
-              position: 'absolute',
-              inset: 'auto 0 0 0',
-              padding: '0 20px 22px',
               display: 'flex',
               gap: 14,
             }}
@@ -254,6 +228,7 @@ export default function Hero() {
               </a>
             ))}
           </nav>
+          </div>
         </div>
       </HeroEnter>
     </section>
