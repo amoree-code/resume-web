@@ -1,3 +1,7 @@
+import { CONTACT_LINKS } from "@/lib/contact";
+
+const emailLink = CONTACT_LINKS.find((l) => l.label === "Email")!;
+
 export default function Footer() {
   return (
     <footer
@@ -14,7 +18,7 @@ export default function Footer() {
     >
       <span>© 2026 Amir Abdulkarim Jabbar</span>
       <a
-        href="mailto:amir.abdulkarim.jabbar@gmail.com"
+        href={emailLink.href}
         style={{ color: "var(--faint)", textDecoration: "none" }}
       >
         amir.abdulkarim.jabbar@gmail.com

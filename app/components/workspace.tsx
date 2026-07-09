@@ -49,18 +49,7 @@ export default function Workspace() {
   }, []);
 
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        maxWidth: 1120,
-        margin: "0 auto",
-        padding: "0 24px 90px",
-      }}
-    >
-      <Reveal>
+    <Reveal>
       <Parallax amount={24}>
         <div ref={wrapRef} style={{ position: "relative" }}>
           <div
@@ -145,7 +134,6 @@ export default function Workspace() {
           </div>
         </div>
       </Parallax>
-      </Reveal>
-    </section>
+    </Reveal>
   );
 }

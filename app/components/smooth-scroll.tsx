@@ -20,6 +20,7 @@ export default function SmoothScroll() {
     });
 
     lenis.on("scroll", ScrollTrigger.update);
+    window.__lenis = lenis;
 
     const update = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(update);
@@ -27,6 +28,7 @@ export default function SmoothScroll() {
 
     return () => {
       lenis.destroy();
+      window.__lenis = undefined;
       gsap.ticker.remove(update);
     };
   }, []);

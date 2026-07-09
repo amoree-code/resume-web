@@ -1,7 +1,13 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ThemeToggle from "./theme-toggle";
+import { smoothScrollTo } from "@/lib/scroll";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = ["about", "work", "experience", "contact"];
 const RESUME_URL = "/resume.pdf";
@@ -10,8 +16,38 @@ const SPRING = { type: "spring" as const, stiffness: 300, damping: 20 };
 export default function Header() {
   const reduceMotion = useReducedMotion();
   const tap = reduceMotion ? undefined : { scale: 0.95 };
+  const headerRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const inner = innerRef.current;
+    if (!header || !inner) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(header, { opacity: 1, y: 0 });
+    } else {
+      gsap.fromTo(
+        header,
+        { opacity: 0, y: -60 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      );
+    }
+
+    // compact + shadow once the page scrolls past the fold
+    const st = ScrollTrigger.create({
+      start: "80px top",
+      end: 999999,
+      toggleClass: { targets: [header, inner], className: "header-scrolled" },
+    });
+
+    return () => st.kill();
+  }, []);
+
   return (
     <header
+      ref={headerRef}
+      className="site-header"
       style={{
         position: "sticky",
         top: 0,
@@ -22,6 +58,8 @@ export default function Header() {
       }}
     >
       <div
+        ref={innerRef}
+        className="site-header-inner"
         style={{
           maxWidth: 1120,
           margin: "0 auto",
@@ -33,7 +71,7 @@ export default function Header() {
           rowGap: 10,
         }}
       >
-        <a
+        <motion.a
           href="#top"
           style={{
             display: "flex",
@@ -43,19 +81,31 @@ export default function Header() {
             fontWeight: 700,
             textDecoration: "none",
           }}
+          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+          whileTap={tap}
+          transition={SPRING}
         >
-          <span
+          <motion.span
             style={{
               width: 9,
               height: 9,
               borderRadius: "50%",
               background: "var(--accent)",
             }}
+            whileHover={
+              reduceMotion
+                ? undefined
+                : {
+                    scale: 1.6,
+                    boxShadow: "0 0 10px 2px var(--accent)",
+                  }
+            }
+            transition={SPRING}
           />
           <span style={{ fontSize: 14 }}>
             amir<span style={{ color: "var(--accent)" }}>.dev</span>
           </span>
-        </a>
+        </motion.a>
         <nav
           style={{
             display: "flex",
@@ -78,6 +128,10 @@ export default function Header() {
                 position: "relative",
               }}
               href={`#${id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo(id);
+              }}
               whileHover={reduceMotion ? undefined : { color: "var(--fg)" }}
               whileTap={tap}
               transition={SPRING}

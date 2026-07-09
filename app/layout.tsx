@@ -1,42 +1,42 @@
-import type { Metadata } from "next";
-import { Merienda } from "next/font/google";
-import SmoothScroll from "./components/smooth-scroll";
-import ParticleField from "./components/particle-field";
-import Cursor from "./components/cursor";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Merienda } from 'next/font/google';
+import SmoothScroll from './components/smooth-scroll';
+import ParticleField from './components/particle-field';
+import Cursor from './components/cursor';
+import './globals.css';
 
 const merienda = Merienda({
-  variable: "--font-merienda",
-  weight: ["400", "500", "600", "700", "900"],
-  subsets: ["latin"],
+  variable: '--font-merienda',
+  weight: ['400', '500', '600', '700', '900'],
+  subsets: ['latin'],
 });
 
-const title = "Amir Abdulkarim Jabbar — Front-end Developer";
+const title = 'Amir Abdulkarim Jabbar — Front-end Developer';
 const description =
-  "Front-end-focused Full Stack Developer with 3 years of experience turning ideas and designs into clean, fast, dependable web products — from large-scale government dashboards to real-time SaaS used by hundreds of thousands.";
+  'Front-end-focused Full Stack Developer with 3 years of experience turning ideas and designs into clean, fast, dependable web products — from large-scale government dashboards to real-time SaaS used by hundreds of thousands.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://amir.dev"),
+  metadataBase: new URL('https://amir.dev'),
   title,
   description,
   keywords: [
-    "Amir Abdulkarim Jabbar",
-    "Front-end Developer",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "Portfolio",
+    'Amir Abdulkarim Jabbar',
+    'Front-end Developer',
+    'Full Stack Developer',
+    'React',
+    'Next.js',
+    'Portfolio',
   ],
-  authors: [{ name: "Amir Abdulkarim Jabbar" }],
+  authors: [{ name: 'Amir Abdulkarim Jabbar' }],
   robots: { index: true, follow: true },
   openGraph: {
-    type: "website",
+    type: 'website',
     title,
     description,
-    siteName: "amir.dev",
+    siteName: 'amir.dev',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title,
     description,
   },
@@ -55,7 +55,7 @@ export default function RootLayout({
         <div
           aria-hidden="true"
           style={{
-            position: "fixed",
+            position: 'fixed',
             inset: 0,
             zIndex: -1,
           }}

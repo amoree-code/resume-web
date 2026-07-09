@@ -5,6 +5,12 @@
     { "num": "10+", "label": "platforms shipped" },
     { "num": "500K+", "label": "users served" }
   ],
+  "services": [
+    "Full-stack Developer",
+    "Web Development",
+    "Advanced Solutions",
+    "Code Optimization"
+  ],
   "skillGroups": [
     {
       "label": "Languages",
@@ -78,6 +84,27 @@
       "category": "Product",
       "desc": "Integrated voting + reporting panel at the scale of tens of thousands of voters, real-time results, and 15+ customizable reports.",
       "tags": ["Realtime", "Analytics"]
+    },
+    {
+      "idx": "PRJ-07",
+      "title": "Riyada",
+      "category": "Landing",
+      "desc": "Landing page for the Entrepreneurship Directorate platform — 95+ Lighthouse score, responsive across 4 feature sections, +120% organic traffic.",
+      "tags": ["SEO", "Performance"]
+    },
+    {
+      "idx": "PRJ-08",
+      "title": "Karwatt Taxi",
+      "category": "Landing",
+      "desc": "Landing page for a 100% electric taxi app with 50K+ monthly visitors, showcasing an eco-friendly fleet across interactive sections — +85% signups.",
+      "tags": ["EV", "Conversion"]
+    },
+    {
+      "idx": "PRJ-09",
+      "title": "Tajr Platform",
+      "category": "Landing",
+      "desc": "Landing page for the import/export document archive system serving 85K+ users, 5 key feature sections for Baghdad Chamber of Commerce — 40% adoption.",
+      "tags": ["Gov", "Adoption"]
     }
   ],
   "experience": [
