@@ -6,10 +6,22 @@
     { "num": "500K+", "label": "users served" }
   ],
   "services": [
-    "Full-stack Developer",
-    "Web Development",
-    "Advanced Solutions",
-    "Code Optimization"
+    {
+      "title": "Full-stack Developer",
+      "description": "End-to-end ownership from database schema to pixel-perfect UI — shipping features that hold up in production, not just in a demo. I move fluidly between backend services, APIs, and the interface that sits on top of them, so nothing gets lost in translation between layers. That means fewer handoffs, fewer misunderstandings between 'what the API returns' and 'what the UI expects', and a product that feels coherent because one person understood it end to end. I've taken products from a blank repository to a live platform serving hundreds of thousands of users, and I know the difference between code that merely works and code a team can keep shipping against for years."
+    },
+    {
+      "title": "Web Development",
+      "description": "Fast, accessible, responsive web apps built with modern frameworks — React, Next.js, and the tools around them. I care about the fundamentals that make a site feel instant: minimal bundle weight, correct semantic HTML, keyboard and screen-reader support, and layouts that hold up from a small phone to an ultrawide monitor without falling apart. Performance budgets aren't an afterthought bolted on before launch — they're a constraint I design against from the first component. The result is a site that loads fast, scores well on Lighthouse, and actually works for every visitor, not just the ones on a fast connection with a new device."
+    },
+    {
+      "title": "Advanced Solutions",
+      "description": "Real-time systems, large-scale data, and custom integrations — the problems that don't have a copy-paste answer. This is where I've spent most of my career: WebSocket-driven live chat serving 10+ production platforms, government dashboards managing 1.5M+ records with fine-grained role-based access, and inventory systems tracking real-time state across hundreds of physical locations. These aren't CRUD apps with a nice UI — they're systems where correctness, concurrency, and scale actually matter, and where a wrong assumption early on becomes very expensive later. I like this kind of work precisely because it demands thinking past the obvious solution."
+    },
+    {
+      "title": "Code Optimization",
+      "description": "Profiling and refining code for speed, maintainability, and long-term scalability, so it stays fast as it grows. I treat performance as a measurable property, not a feeling — profiling first, guessing never — and I look for the root cause of slowness rather than papering over symptoms with more hardware or more caching. The same discipline applies to maintainability: reducing duplication, naming things so the next person doesn't have to guess, and keeping components small enough to actually reason about. Code that's fast today and unreadable tomorrow isn't a win; the goal is a codebase a team can keep moving fast in, six months and six features from now."
+    }
   ],
   "skillGroups": [
     {

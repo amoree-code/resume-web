@@ -1,6 +1,8 @@
 import Header from './components/header';
 import Hero from './components/hero';
 import About from './components/about';
+import Languages from './components/languages';
+import Workspace from './components/workspace';
 import Marquee from './components/marquee';
 import SectionIndicator from './components/section-indicator';
 import Work from './components/work';
@@ -32,10 +34,14 @@ export default function Home() {
       <SectionIndicator />
       <Header />
       <Hero />
-      <About skillGroups={skillGroups} services={services} />
-      <Marquee items={services} />
-      <Work projects={projects} />
+      <About services={services} />
+      <Languages skillGroups={skillGroups} />
+      <section style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px 90px' }}>
+        <Workspace />
+      </section>
+      <Marquee items={services.map((s) => s.title)} />
       <Experience experience={experience} />
+      <Work projects={projects} />
       <Contact />
       <Footer />
     </div>
