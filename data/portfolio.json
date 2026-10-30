@@ -1,80 +1,57 @@
 {
+  "summary": "Front-end-focused Full Stack Developer with 2 years of experience building production web applications for government, enterprise, and SaaS products — React, Next.js, Vue.js, TypeScript, WebSocket systems, role-based access control, and multilingual RTL interfaces, with practical back-end experience in Node.js, NestJS, and SQL databases.",
   "stats": [
-    {
-      "num": "1.5M+",
-      "label": "records managed"
-    },
-    {
-      "num": "500K+",
-      "label": "users served"
-    },
-    {
-      "num": "10+",
-      "label": "platforms integrated"
-    },
-    {
-      "num": "2",
-      "label": "years shipping"
-    }
+    { "num": "1.5M+", "label": "records managed" },
+    { "num": "500K+", "label": "users served" },
+    { "num": "10+", "label": "platforms integrated" },
+    { "num": "2", "label": "years shipping" }
   ],
   "services": [
     {
-      "title": "Full-stack Developer",
-      "description": "Front-end specialized, comfortable down to the database. I own a feature from schema and API to the screen, so nothing gets lost between what the API returns and what the UI expects."
+      "title": "Dashboards at scale",
+      "description": "Control panels over millions of records — large tables, approval workflows, and role-based access with dozens of roles and fine-grained permission levels."
     },
     {
-      "title": "Web Development",
-      "description": "Fast, accessible, responsive apps in React and Next.js — semantic HTML, keyboard support, and layouts that hold from a small phone to an ultrawide monitor, in English and Arabic (RTL)."
+      "title": "Real-time systems",
+      "description": "WebSocket live chat and ticketing integrated into 10+ production platforms, live room and inventory availability, and embeddable widgets that run on any host site."
     },
     {
-      "title": "Advanced Solutions",
-      "description": "The problems without a copy-paste answer: WebSocket real-time chat across 10+ platforms, government dashboards over 1.5M+ records with 50+ roles, and live inventory across 200+ rooms."
+      "title": "Arabic-first, multilingual UI",
+      "description": "RTL and LTR from one codebase, localized in Arabic, English, Sorani, and Kurmanji — planned from the first commit, not retrofitted."
     },
     {
-      "title": "Code Optimization",
-      "description": "Profile first, guess never. Smaller bundles, lazy loading, virtualized tables, and code a team can keep shipping against six months later."
+      "title": "Full stack when it's needed",
+      "description": "Node.js, NestJS, Express, and Prisma over PostgreSQL, MySQL, or MongoDB — so the API and the interface on top of it are designed together."
     }
   ],
   "skillGroups": [
     {
-      "label": "Languages",
-      "items": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "TypeScript"
-      ]
+      "label": "Front-end",
+      "items": ["React.js", "Next.js", "Vue.js", "Redux Toolkit", "TanStack Query & Router", "Vite", "Framer Motion"]
     },
     {
-      "label": "Front-end",
-      "items": [
-        "React.js",
-        "Next.js",
-        "Vue.js",
-        "TanStack Query",
-        "Redux Toolkit",
-        "Framer Motion"
-      ]
+      "label": "Back-end",
+      "items": ["Node.js", "NestJS", "Express", "REST APIs", "WebSocket", "Prisma ORM", "Sequelize"]
+    },
+    {
+      "label": "Databases",
+      "items": ["PostgreSQL", "MySQL", "MongoDB"]
+    },
+    {
+      "label": "Languages",
+      "items": ["HTML", "CSS", "JavaScript", "TypeScript"]
     },
     {
       "label": "UI Libraries",
-      "items": [
-        "Tailwind CSS",
-        "Shadcn",
-        "Mantine UI",
-        "Hero UI"
-      ]
+      "items": ["Tailwind CSS", "shadcn/ui", "Mantine UI", "Hero UI"]
     },
     {
-      "label": "Back-end & Data",
-      "items": [
-        "Node.js",
-        "Nest.js",
-        "Express",
-        "Prisma",
-        "PostgreSQL",
-        "MongoDB"
-      ]
+      "label": "Localization",
+      "items": ["RTL layouts", "i18n", "Arabic", "English", "Sorani", "Kurmanji"]
+    },
+    {
+      "label": "Tools",
+      "items": ["Git & GitHub", "Docker", "nginx", "Mapbox GL", "Postman", "Swagger", "Apidog"]
     }
   ],
   "projects": [
@@ -82,13 +59,8 @@
       "idx": "PRJ-01",
       "title": "Technical Support System",
       "category": "SaaS",
-      "desc": "Embedded live-chat SaaS integrated into 10+ production platforms. I built the agent dashboard — WebSocket real-time chat, ticketing, 4-language localization (Arabic, English, Sorani, Kurmanji) — and I'm building its web SDK.",
-      "tags": [
-        "React 19",
-        "WebSocket",
-        "i18n",
-        "Web SDK"
-      ],
+      "desc": "Real-time customer communication platform. Built the agent dashboard — WebSocket live chat, ticketing for hundreds of daily tickets, 4-language localization — and building its Web SDK: a framework-agnostic TypeScript chat widget isolated in Shadow DOM, shipped as an npm package and versioned CDN script.",
+      "tags": ["React", "WebSocket", "TypeScript", "Shadow DOM", "i18n"],
       "metric": "10+",
       "metricLabel": "production platforms"
     },
@@ -96,12 +68,8 @@
       "idx": "PRJ-02",
       "title": "Dashboard Entrepreneurship",
       "category": "Gov",
-      "desc": "Control panel for the Ministry of Higher Education managing 1.5M+ student and project records, with an approval workflow and role-based access for 50+ user roles.",
-      "tags": [
-        "React",
-        "RBAC",
-        "Large tables"
-      ],
+      "desc": "Ministry of Higher Education control panel managing 1.5M+ student and project records, with role-based access for 50+ user roles, a streamlined project review workflow, and messaging handling thousands of messages a day.",
+      "tags": ["React", "RBAC", "Large tables", "Messaging"],
       "link": "https://e.mohesr.gov.iq/ar",
       "metric": "1.5M+",
       "metricLabel": "student & project records"
@@ -110,13 +78,8 @@
       "idx": "PRJ-03",
       "title": "Riyada",
       "category": "Gov",
-      "desc": "Admin dashboard for the Entrepreneurship Directorate managing 500,000+ users with 15+ permission levels, plus its bilingual Arabic/English landing page in Next.js.",
-      "tags": [
-        "React",
-        "Next.js",
-        "Permissions",
-        "ar/en"
-      ],
+      "desc": "Entrepreneurship Directorate admin dashboard managing data for 500,000+ users with dynamic roles across 15+ permission levels, plus the public landing page in Next.js with Arabic and English localization.",
+      "tags": ["React", "Vite", "Next.js", "Permissions", "ar/en"],
       "link": "https://riyada.iq/en",
       "metric": "500K+",
       "metricLabel": "users"
@@ -125,25 +88,17 @@
       "idx": "PRJ-04",
       "title": "Archive Documents",
       "category": "Gov",
-      "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer/exporter records, dual manager/employee panels, 8 permission tiers and fast search.",
-      "tags": [
-        "React",
-        "Mantine",
-        "Search"
-      ],
+      "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer and exporter records with fast search, separate manager and employee panels, 8 permission tiers, and the platform landing page.",
+      "tags": ["React", "Vite", "Mantine", "Hero UI", "Search"],
       "metric": "85K+",
-      "metricLabel": "importer/exporter records"
+      "metricLabel": "importer & exporter records"
     },
     {
       "idx": "PRJ-05",
       "title": "Hospital System",
       "category": "Product",
-      "desc": "QR room-scanning and inventory tracking across 200+ rooms with real-time availability and role-based access for 15+ departments.",
-      "tags": [
-        "React",
-        "Realtime",
-        "QR"
-      ],
+      "desc": "QR-based room scanning and inventory tracking across 200+ rooms, with real-time availability of rooms, equipment and items, and role-based access for staff across 15+ departments.",
+      "tags": ["React", "Vite", "React Query", "JWT", "QR"],
       "metric": "200+",
       "metricLabel": "rooms tracked live"
     },
@@ -151,15 +106,39 @@
       "idx": "PRJ-06",
       "title": "Karwatt Taxi",
       "category": "Landing",
-      "desc": "Landing page for a 100% electric taxi app, showcasing the eco-friendly fleet across interactive sections. Next.js, shipped with Docker + nginx.",
-      "tags": [
-        "Next.js",
-        "Docker",
-        "EV"
-      ],
+      "desc": "Responsive landing page for a fully electric taxi platform serving 50K+ monthly visitors, deployed with Docker and nginx.",
+      "tags": ["Next.js", "Docker", "nginx"],
       "link": "https://karwatt.taxi",
-      "metric": "100%",
-      "metricLabel": "electric fleet"
+      "metric": "50K+",
+      "metricLabel": "monthly visitors"
+    },
+    {
+      "idx": "PRJ-07",
+      "title": "Kar Dashboard",
+      "category": "Product",
+      "desc": "Admin dashboard for a ride-hailing platform — multi-tenant, localized in English, Arabic and Sorani, with Mapbox maps.",
+      "tags": ["React 19", "Vite", "TanStack Query", "shadcn/ui", "Mapbox GL"]
+    },
+    {
+      "idx": "PRJ-08",
+      "title": "Tajer Baghdad",
+      "category": "Gov",
+      "desc": "Certificate of Origin portal for Baghdad traders — an Arabic-first, right-to-left interface.",
+      "tags": ["Vue 3", "Element Plus", "Bootstrap", "RTL"]
+    },
+    {
+      "idx": "PRJ-09",
+      "title": "EPMS Dashboard",
+      "category": "Product",
+      "desc": "Internal dashboard for LightRing built on a typed OpenAPI client, with i18next localization.",
+      "tags": ["React", "Vite", "TypeScript", "i18next", "OpenAPI"]
+    },
+    {
+      "idx": "PRJ-10",
+      "title": "Dynamic Resume Platform",
+      "category": "Personal",
+      "desc": "A dynamic resume platform: a NestJS + Prisma API with a Next.js front end.",
+      "tags": ["NestJS", "Prisma", "Next.js"]
     }
   ],
   "experience": [
@@ -168,9 +147,9 @@
       "role": "Front-end Developer",
       "dates": "Sep 2025 – Present",
       "points": [
-        "Build admin dashboards and landing pages for the company's client platforms — RCCM, Riyada and Karwatt",
-        "Built the RCCM agent dashboard (live chat, tickets, 4-language i18n) and now building its web SDK",
-        "React 19, Vite, TanStack Query, Tailwind and shadcn/ui; Next.js with ar/en i18n for landing pages"
+        "Build and maintain responsive dashboards and landing pages for the company's client platforms — RCCM, Riyada and Karwatt",
+        "Built the agent dashboard of the Technical Support System (live chat, tickets, 4-language i18n) and now building its Web SDK",
+        "Work with designers on pixel-perfect UI, cross-browser and mobile-first; React 19, Vite, TanStack, Tailwind, shadcn/ui and Next.js"
       ]
     },
     {
@@ -179,8 +158,8 @@
       "dates": "Jul 2025 – Aug 2025",
       "points": [
         "Built the Ministry of Higher Education dashboard over 1.5M+ records and 50+ user roles",
-        "Developed reusable React components for internal dashboard systems",
-        "Integrated REST APIs through a typed OpenAPI client and managed state with Redux Toolkit"
+        "Developed reusable interface components for internal dashboard systems, including EPMS",
+        "Integrated backend services through a typed OpenAPI client and managed complex application state with the backend team"
       ]
     },
     {
@@ -189,9 +168,22 @@
       "dates": "Feb 2025 – Jul 2025",
       "points": [
         "Built the Baghdad Chamber of Commerce document archive — 85,000+ records, 8 permission tiers",
-        "Interactive, mobile-first UIs with React, Tailwind CSS, Mantine and Hero UI",
-        "Took part in code reviews and improved performance and SEO across client projects"
+        "Developed interactive, mobile-first interfaces across all device sizes with React, Mantine and Hero UI",
+        "Improved website performance and SEO through optimization and best practices"
       ]
     }
-  ]
+  ],
+  "education": [
+    {
+      "title": "High School Diploma",
+      "place": "Al-Quds School",
+      "dates": "2026",
+      "note": "Media Technology track"
+    }
+  ],
+  "spokenLanguages": [
+    { "name": "Arabic", "level": "Native" },
+    { "name": "English", "level": "Intermediate (B1)" }
+  ],
+  "focus": "Deepening back-end work with NestJS — data modeling, auth and module boundaries."
 }

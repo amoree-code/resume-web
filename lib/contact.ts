@@ -1,3 +1,7 @@
+// Live resume on Google Drive — the single place every "Resume" / "CV" link points.
+export const RESUME_URL =
+  'https://drive.google.com/file/d/1AVBHYs8E43Jv3vrNLiU7tm_bJugXFW36/view?usp=drive_link';
+
 export type ContactLink = {
   label: string;
   href: string;

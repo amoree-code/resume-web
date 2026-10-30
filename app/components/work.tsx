@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitReveal from "./split-reveal";
 import type { Project } from "@/lib/portfolio";
+import { RESUME_URL } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,7 +139,7 @@ export default function Work({ projects }: { projects: Project[] }) {
       </motion.div>
 
       <div style={{ textAlign: "center", marginTop: 36 }}>
-        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+        <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
           Full project history in the resume →
         </a>
       </div>

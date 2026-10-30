@@ -12,8 +12,11 @@ const GROUP_ICONS: Record<string, string> = {
   Languages: "M8 5 3 12l5 7M16 5l5 7-5 7M13 4l-2 16",
   "Front-end": "M4 5h16v11H4z M4 19h16 M9 8l3 3-3 3 M15 8l-3 3 3 3",
   "UI Libraries": "M4 4h7v7H4z M13 4h7v7h-7z M4 13h7v7H4z M13 13h7v7h-7z",
-  "Back-end & Data":
+  "Back-end": "M4 4h16v6H4z M4 14h16v6H4z M8 7h.01 M8 17h.01",
+  Databases:
     "M4 5c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2Z M4 5v14c0 1.1 3.6 2 8 2s8-.9 8-2V5 M4 12c0 1.1 3.6 2 8 2s8-.9 8-2",
+  Localization: "M3 12h18 M12 3a14 14 0 0 1 0 18 M12 3a14 14 0 0 0 0 18 M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18",
+  Tools: "M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z",
 };
 
 export default function Languages({ skillGroups }: { skillGroups: SkillGroup[] }) {

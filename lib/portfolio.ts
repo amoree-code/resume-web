@@ -20,7 +20,14 @@ export type Experience = {
   points: string[];
 };
 
+export type Education = { title: string; place: string; dates: string; note?: string };
+export type SpokenLanguage = { name: string; level: string };
+
 export type PortfolioData = {
+  summary: string;
+  focus: string;
+  education: Education[];
+  spokenLanguages: SpokenLanguage[];
   stats: Stat[];
   services: Service[];
   skillGroups: SkillGroup[];

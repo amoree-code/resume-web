@@ -1091,3 +1091,44 @@ html.custom-cursor * {
     animation: none !important;
   }
 }
+
+/* ---------- education / languages / focus ---------- */
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+  margin-top: clamp(32px, 5vw, 56px);
+}
+.fact-card {
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.6);
+  background: var(--panel);
+  padding: clamp(20px, 3vw, 28px);
+}
+.fact-card .eyebrow {
+  margin: 0 0 14px;
+}
+.fact-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  margin: 0;
+}
+.fact-text {
+  margin: 6px 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.fact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin: 0 0 8px;
+}
+.fact-level {
+  font-size: var(--text-xs);
+  color: var(--faint);
+}

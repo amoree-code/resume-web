@@ -23,7 +23,8 @@ const personJsonLd = {
 };
 
 export default function Home() {
-  const { stats, skillGroups, services, projects, experience } = getPortfolioData();
+  const { stats, skillGroups, services, projects, experience, education, spokenLanguages, focus } =
+    getPortfolioData();
 
   return (
     <div style={{ minHeight: '100svh', overflowX: 'clip' }}>
@@ -40,7 +41,12 @@ export default function Home() {
         <Workspace />
       </section>
       <Marquee items={services.map((s) => s.title)} />
-      <Experience experience={experience} />
+      <Experience
+        experience={experience}
+        education={education}
+        spokenLanguages={spokenLanguages}
+        focus={focus}
+      />
       <Work projects={projects} />
       <Contact />
       <Footer />

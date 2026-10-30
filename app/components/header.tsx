@@ -6,11 +6,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ThemeToggle from "./theme-toggle";
 import { smoothScrollTo } from "@/lib/scroll";
+import { RESUME_URL } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = ["about", "work", "experience", "contact"];
-const RESUME_URL = "/resume.pdf";
 const SPRING = { type: "spring" as const, stiffness: 300, damping: 20 };
 
 export default function Header() {
@@ -87,7 +87,7 @@ export default function Header() {
           transition={SPRING}
         >
           <span className="site-logo-dot" />
-          ameer<span style={{ color: "var(--accent)" }}>.lami</span>
+          ameer<span style={{ color: "var(--accent)" }}>.abdulkareem</span>
         </motion.a>
 
         <nav className="site-nav" aria-label="Primary">
