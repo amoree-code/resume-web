@@ -8,6 +8,7 @@ export default function CvDownloadButton() {
       target="_blank"
       rel="noopener noreferrer"
       className="btn btn-ghost cv-download-btn"
+      data-magnetic
     >
       <svg
         className="cv-download-icon"

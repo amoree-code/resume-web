@@ -10,7 +10,8 @@ import { RESUME_URL } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NAV_LINKS = ["about", "work", "experience", "contact"];
+// page order, so the nav, the eyebrows and the side indicator all agree
+const NAV_LINKS = ["about", "experience", "work", "education", "contact"];
 const SPRING = { type: "spring" as const, stiffness: 300, damping: 20 };
 
 export default function Header() {
@@ -43,11 +44,11 @@ export default function Header() {
     return () => st.kill();
   }, []);
 
-  // Escape closes the mobile menu; widening past the breakpoint resets it.
+  // Escape closes the mobile menu; widening past the 960px breakpoint resets it.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 960px)");
     const onMq = () => mq.matches && setOpen(false);
     window.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
@@ -87,7 +88,10 @@ export default function Header() {
           transition={SPRING}
         >
           <span className="site-logo-dot" />
-          ameer<span style={{ color: "var(--accent)" }}>.abdulkareem</span>
+          {/* one element: the link is a flex row with a gap, so split text nodes would gap apart */}
+          <span className="site-logo-name">
+            ameer<span style={{ color: "var(--accent)" }}>.abdulkareem</span>
+          </span>
         </motion.a>
 
         <nav className="site-nav" aria-label="Primary">

@@ -61,7 +61,7 @@ export default function Work({ projects }: { projects: Project[] }) {
     <section id="work" className="container section">
       <div className="section-head">
         <div>
-          <p className="eyebrow" style={{ margin: "0 0 12px" }}>02 — Selected work</p>
+          <p className="eyebrow" style={{ margin: "0 0 12px" }}>03 — Selected work</p>
           <SplitReveal className="section-title" text="Real scale, *real users.*" />
         </div>
         <div className="work-filters" role="group" aria-label="Filter projects">

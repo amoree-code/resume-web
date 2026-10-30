@@ -29,42 +29,6 @@ export default function Languages({ skillGroups }: { skillGroups: SkillGroup[] }
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const ctx = gsap.context(() => {
-      // Collision entrance: the section slams up from below and overshoots
-      // slightly before settling, like it landed on the previous one.
-      if (reduceMotion) {
-        gsap.set(sectionRef.current, { opacity: 1, y: 0, scale: 1 });
-      } else {
-        gsap.fromTo(
-          sectionRef.current,
-          { y: 140, opacity: 0, scale: 0.92 },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            ease: "back.out(1.9)",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-            onStart: () => {
-              gsap.fromTo(
-                sectionRef.current,
-                { boxShadow: "0 0 0 0 rgba(0,0,0,0)" },
-                {
-                  boxShadow: "0 -30px 60px -20px rgba(0,0,0,.35)",
-                  duration: 0.35,
-                  yoyo: true,
-                  repeat: 1,
-                  ease: "power1.out",
-                }
-              );
-            },
-          }
-        );
-      }
-
       const rows = gsap.utils.toArray<HTMLElement>(".lang-row");
       rows.forEach((row) => {
         const icon = row.querySelector(".lang-icon");

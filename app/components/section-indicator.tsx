@@ -10,9 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SECTIONS: { id: string; num: string; label: string; endId?: string }[] = [
   { id: "about", num: "01", label: "What I do" },
-  { id: "work", num: "02", label: "Projects" },
-  { id: "experience", num: "03", label: "Experience" },
-  { id: "contact", num: "04", label: "Contact", endId: "keep-in-touch" },
+  { id: "experience", num: "02", label: "Experience" },
+  { id: "work", num: "03", label: "Projects" },
+  { id: "education", num: "04", label: "Education" },
+  { id: "contact", num: "05", label: "Contact", endId: "keep-in-touch" },
 ];
 
 export default function SectionIndicator() {

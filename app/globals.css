@@ -70,7 +70,8 @@ kbd {
   --container: 1180px;
 
   --radius: 0.75rem;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   --bg: oklch(0.1797 0.0043 308.19);
   --panel: oklch(0.2150 0.0040 308.19);
@@ -182,6 +183,24 @@ body {
   background: color-mix(in oklch, var(--panel) 70%, transparent);
   color: var(--fg);
 }
+.btn:active,
+.work-filter:active,
+.menu-btn:active,
+.hero-social-btn:active {
+  scale: 0.97;
+  transition: scale 120ms ease-out;
+}
+.btn,
+.work-filter,
+.menu-btn,
+.hero-social-btn {
+  transition-property: transform, box-shadow, background-color, border-color, color, scale, translate;
+}
+/* magnetic pull (see magnetic.tsx) rides on the independent translate property */
+[data-magnetic] {
+  translate: var(--mag-x, 0) var(--mag-y, 0);
+  transition: translate 450ms var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+}
 @media (hover: hover) and (pointer: fine) {
   .btn:hover {
     transform: translateY(-2px);
@@ -202,6 +221,18 @@ body {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   transform-origin: 0 50%;
   z-index: 60;
+}
+
+/* ---------- first-paint guard ----------
+ * html.js is set by the head script before paint, so content never flashes in and then
+ * snaps out of view before its entrance plays. No JS or reduced motion → shown as-is. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-enter] {
+    opacity: 0;
+  }
+  html.js .split-word > span {
+    transform: translateY(110%);
+  }
 }
 
 /* ---------- split-text reveal ---------- */
@@ -341,7 +372,8 @@ body {
 .mobile-menu .btn {
   margin-top: 12px;
 }
-@media (min-width: 768px) {
+/* 960, not 768: five links + the long logo need ~700px, too tight at small tablets */
+@media (min-width: 960px) {
   .site-nav {
     display: flex;
     align-items: center;
@@ -1092,43 +1124,121 @@ html.custom-cursor * {
   }
 }
 
-/* ---------- education / languages / focus ---------- */
-.facts-grid {
+/* ---------- education ---------- */
+.edu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: clamp(12px, 1.6vw, 20px);
-  margin-top: clamp(32px, 5vw, 56px);
 }
-.fact-card {
+.edu-card {
   height: 100%;
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 1.6);
   background: var(--panel);
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(22px, 3.4vw, 36px);
 }
-.fact-card .eyebrow {
-  margin: 0 0 14px;
+.edu-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "year year" "rule rule" "body body";
+  gap: 14px;
 }
-.fact-title {
+.edu-item > div {
+  grid-area: body;
+}
+.edu-year {
+  grid-area: year;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  line-height: 0.9;
+  color: var(--accent);
+}
+.edu-rule {
+  grid-area: rule;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2) 50%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-out) 150ms;
+}
+.edu-grid[data-inview="true"] .edu-rule {
+  transform: scaleX(1);
+}
+.edu-title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--text-lg);
+  font-size: var(--text-h3);
+  line-height: 1.1;
   margin: 0;
 }
-.fact-text {
+.edu-place {
   margin: 6px 0 0;
-  font-size: var(--text-sm);
   color: var(--muted);
 }
-.fact-row {
+.edu-note {
+  display: inline-block;
+  margin: 14px 0 0;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  color: var(--faint);
+}
+.lang-levels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.lang-level-head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 4px 12px;
-  margin: 0 0 8px;
+  margin-bottom: 12px;
 }
-.fact-level {
+.lang-level-label {
   font-size: var(--text-xs);
   color: var(--faint);
+}
+.cefr {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+}
+.cefr-step {
+  position: relative;
+  overflow: clip;
+  display: flex;
+  justify-content: center;
+  padding-top: 14px;
+  font-size: 0.68rem;
+  color: var(--faint);
+}
+.cefr-step::before,
+.cefr-step::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  border-radius: 3px;
+}
+.cefr-step::before {
+  background: var(--border);
+}
+.cefr-step::after {
+  background: linear-gradient(90deg, var(--accent), color-mix(in oklch, var(--accent) 60%, var(--accent-2)));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 420ms var(--ease-out) calc(200ms + var(--i) * 90ms);
+}
+.edu-grid[data-inview="true"] .cefr-step[data-on="true"]::after {
+  transform: scaleX(1);
+}
+.cefr-step[data-on="true"] {
+  color: var(--fg);
 }

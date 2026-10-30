@@ -30,6 +30,7 @@ export default function Contact() {
         <div className="contact-card">
           <div className="contact-glow" aria-hidden="true" />
           <div style={{ position: "relative" }}>
+            <p className="eyebrow" style={{ margin: "0 0 8px" }}>05 — Contact</p>
             <p className="mono contact-prompt">
               $ <span style={{ color: "var(--accent)" }}>./say-hello.sh</span>
               <span className="contact-caret" aria-hidden="true">▊</span>
@@ -42,6 +43,7 @@ export default function Contact() {
             <motion.a
               href={emailLink.href}
               className="btn btn-primary contact-email"
+              data-magnetic
               whileHover={hover}
               whileTap={tap}
               transition={SPRING}

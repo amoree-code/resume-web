@@ -4,6 +4,7 @@ import SmoothScroll from './components/smooth-scroll';
 import ParticleField from './components/particle-field';
 import Cursor from './components/cursor';
 import ScrollProgress from './components/scroll-progress';
+import Magnetic from './components/magnetic';
 import './globals.css';
 
 const geist = Geist({
@@ -74,16 +75,17 @@ export default function RootLayout({
       className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        {/* set the saved / system theme before first paint so there is no flash */}
+        {/* before first paint: mark JS on (for entrance guards) and apply the saved / system theme */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}`,
+            __html: `document.documentElement.classList.add('js');try{var t=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}`,
           }}
         />
       </head>
       <body className="min-h-full">
         <SmoothScroll />
         <ScrollProgress />
+        <Magnetic />
         <Cursor />
         <div
           aria-hidden="true"

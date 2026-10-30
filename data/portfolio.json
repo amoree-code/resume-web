@@ -184,6 +184,5 @@
   "spokenLanguages": [
     { "name": "Arabic", "level": "Native" },
     { "name": "English", "level": "Intermediate (B1)" }
-  ],
-  "focus": "Deepening back-end work with NestJS — data modeling, auth and module boundaries."
+  ]
 }

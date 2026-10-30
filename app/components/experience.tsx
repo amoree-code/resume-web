@@ -5,24 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "./reveal";
 import SplitReveal from "./split-reveal";
-import type {
-  Education,
-  Experience as ExperienceItem,
-  SpokenLanguage,
-} from "@/lib/portfolio";
+import type { Experience as ExperienceItem } from "@/lib/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Experience({
   experience,
-  education,
-  spokenLanguages,
-  focus,
 }: {
   experience: ExperienceItem[];
-  education: Education[];
-  spokenLanguages: SpokenLanguage[];
-  focus: string;
 }) {
   const listRef = useRef<HTMLDivElement>(null);
   const trunkRef = useRef<HTMLDivElement>(null);
@@ -60,7 +50,7 @@ export default function Experience({
     <section id="experience" className="container section">
       <div className="section-head">
         <div>
-          <p className="eyebrow" style={{ margin: "0 0 12px" }}>03 — Experience</p>
+          <p className="eyebrow" style={{ margin: "0 0 12px" }}>02 — Experience</p>
           <SplitReveal className="section-title" text="Where I've *shipped.*" />
         </div>
       </div>
@@ -94,39 +84,6 @@ export default function Experience({
         })}
       </div>
 
-      <div className="facts-grid">
-        <Reveal>
-          <div className="fact-card">
-            <p className="eyebrow">Education</p>
-            {education.map((ed) => (
-              <div key={ed.title}>
-                <h3 className="fact-title">{ed.title}</h3>
-                <p className="fact-text">
-                  {ed.place} · {ed.dates}
-                  {ed.note ? ` · ${ed.note}` : ""}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-        <Reveal delayMs={60}>
-          <div className="fact-card">
-            <p className="eyebrow">Spoken languages</p>
-            {spokenLanguages.map((l) => (
-              <p key={l.name} className="fact-row">
-                <span className="fact-title">{l.name}</span>
-                <span className="mono fact-level">{l.level}</span>
-              </p>
-            ))}
-          </div>
-        </Reveal>
-        <Reveal delayMs={120}>
-          <div className="fact-card">
-            <p className="eyebrow">Current focus</p>
-            <p className="fact-text" style={{ color: "var(--fg)" }}>{focus}</p>
-          </div>
-        </Reveal>
-      </div>
     </section>
   );
 }

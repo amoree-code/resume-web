@@ -7,6 +7,7 @@ import Marquee from './components/marquee';
 import SectionIndicator from './components/section-indicator';
 import Work from './components/work';
 import Experience from './components/experience';
+import Education from './components/education';
 import Contact from './components/contact';
 import Footer from './components/footer';
 import { getPortfolioData } from '@/lib/portfolio';
@@ -23,7 +24,7 @@ const personJsonLd = {
 };
 
 export default function Home() {
-  const { stats, skillGroups, services, projects, experience, education, spokenLanguages, focus } =
+  const { stats, skillGroups, services, projects, experience, education, spokenLanguages } =
     getPortfolioData();
 
   return (
@@ -41,13 +42,9 @@ export default function Home() {
         <Workspace />
       </section>
       <Marquee items={services.map((s) => s.title)} />
-      <Experience
-        experience={experience}
-        education={education}
-        spokenLanguages={spokenLanguages}
-        focus={focus}
-      />
+      <Experience experience={experience} />
       <Work projects={projects} />
+      <Education education={education} spokenLanguages={spokenLanguages} />
       <Contact />
       <Footer />
     </div>

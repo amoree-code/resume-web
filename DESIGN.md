@@ -58,9 +58,11 @@ bold. In a `SplitReveal` title, wrap the accent words in `*stars*`.
 - `.container`: `max-width: 1180px`, `padding-inline: var(--gutter)` (16 → 32px).
 - `.section`: `padding-block: var(--section-y)` (64 → 128px).
 - Breakpoints (mobile-first, structural only): **640** hero buttons stop stretching · **720**
-  tool groups go three-column · **768** desktop nav replaces the menu button, experience rail
-  moves to the centre, services widen · **900** hero stats go 2×2 → 4 across · **1440** section
-  indicator appears.
+  tool groups go three-column · **768** experience rail moves to the centre, services widen ·
+  **900** hero stats go 2×2 → 4 across · **960** desktop nav replaces the menu button ·
+  **1440** section indicator appears.
+- Section order (nav, eyebrows and side indicator agree): 01 About → Stack → 02 Experience →
+  03 Work → 04 Education → 05 Contact.
 - Work cards use a **container query**: at ≥520px of card width the metric sits beside the copy.
 - Tap targets ≥ 44px; heights use `svh` with a `vh` fallback; overflow clipping uses `clip`, never
   `hidden`, on anything that wraps the sticky header.
@@ -83,6 +85,15 @@ bold. In a `SplitReveal` title, wrap the accent words in `*stars*`.
 | Filter pill        | work filters                  | Framer `layoutId` slide; cards re-flow with `layout` |
 | Scrubbed rows      | services, experience rail     | GSAP ScrollTrigger scrub                         |
 | Hover lift         | buttons, chips, socials       | `translateY(-2…-3px)`, spring `{300, 20}`        |
+| Press feedback     | buttons, filters, menu        | `scale: .97` on `:active`, 120ms ease-out        |
+| Magnetic pull      | primary CTAs, socials         | `[data-magnetic]` → `--mag-x/y` on `translate`, max 10px |
+| CEFR fill          | Education · spoken languages  | segments fill left→right, 90ms stagger, on view  |
+| Rule draw          | Education card                | gradient rule `scaleX` 0→1 on view               |
+
+Curves: `--ease-out` `cubic-bezier(.23,1,.32,1)` for entrances, `--ease-in-out`
+`cubic-bezier(.77,0,.175,1)` for on-screen movement — never `ease-in` on UI.
+First paint: the head script sets `html.js`; under `prefers-reduced-motion: no-preference`,
+`[data-enter]` and split words start hidden so nothing flashes before its entrance.
 
 Reduced motion: GSAP effects return early, Framer variants are disabled, CSS animations are cut
 to 0.01ms, the aurora and marquee stop.
