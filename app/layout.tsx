@@ -1,8 +1,9 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Merienda } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Geist, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import SmoothScroll from './components/smooth-scroll';
 import ParticleField from './components/particle-field';
 import Cursor from './components/cursor';
+import ScrollProgress from './components/scroll-progress';
 import './globals.css';
 
 const geist = Geist({
@@ -10,17 +11,24 @@ const geist = Geist({
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+// Display face: headings and the italic accent words.
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-instrument',
+  weight: '400',
+  style: ['normal', 'italic'],
   subsets: ['latin'],
 });
 
-// Script face is reserved for the hero signature lines only.
-const merienda = Merienda({
-  variable: '--font-merienda',
-  weight: ['900'],
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
   subsets: ['latin'],
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1a181b',
+};
 
 const title = 'Ameer Abdulkareem Jabbar Lami — Front-end Developer';
 const description =
@@ -61,10 +69,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable} ${merienda.variable}`}
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* set the saved / system theme before first paint so there is no flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <SmoothScroll />
+        <ScrollProgress />
         <Cursor />
         <div
           aria-hidden="true"

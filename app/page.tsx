@@ -23,20 +23,20 @@ const personJsonLd = {
 };
 
 export default function Home() {
-  const { skillGroups, services, projects, experience } = getPortfolioData();
+  const { stats, skillGroups, services, projects, experience } = getPortfolioData();
 
   return (
-    <div style={{ minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100svh', overflowX: 'clip' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <SectionIndicator />
       <Header />
-      <Hero />
+      <Hero stats={stats} />
       <About services={services} />
       <Languages skillGroups={skillGroups} />
-      <section style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px 90px' }}>
+      <section className="container" style={{ paddingBottom: 'var(--section-y)' }}>
         <Workspace />
       </section>
       <Marquee items={services.map((s) => s.title)} />

@@ -10,6 +10,8 @@ export type Project = {
   desc: string;
   tags: string[];
   link?: string;
+  metric?: string;
+  metricLabel?: string;
 };
 export type Experience = {
   company: string;

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ThemeToggle from "./theme-toggle";
@@ -17,12 +17,11 @@ export default function Header() {
   const reduceMotion = useReducedMotion();
   const tap = reduceMotion ? undefined : { scale: 0.95 };
   const headerRef = useRef<HTMLElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const header = headerRef.current;
-    const inner = innerRef.current;
-    if (!header || !inner) return;
+    if (!header) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.set(header, { opacity: 1, y: 0 });
@@ -30,135 +29,110 @@ export default function Header() {
       gsap.fromTo(
         header,
         { opacity: 0, y: -60 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", clearProps: "transform" }
       );
     }
 
-    // compact + shadow once the page scrolls past the fold
+    // compact + blur once the page scrolls past the fold
     const st = ScrollTrigger.create({
       start: "80px top",
       end: 999999,
-      toggleClass: { targets: [header, inner], className: "header-scrolled" },
+      toggleClass: { targets: header, className: "header-scrolled" },
     });
 
     return () => st.kill();
   }, []);
 
-  return (
-    <header
-      ref={headerRef}
-      className="site-header"
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
+  // Escape closes the mobile menu; widening past the breakpoint resets it.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onMq = () => mq.matches && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onMq);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onMq);
+    };
+  }, [open]);
+
+  const go = (id: string) => {
+    setOpen(false);
+    smoothScrollTo(id);
+  };
+
+  const links = NAV_LINKS.map((id) => (
+    <a
+      key={id}
+      className="navlink"
+      href={`#${id}`}
+      onClick={(e) => {
+        e.preventDefault();
+        go(id);
       }}
     >
-      <div
-        ref={innerRef}
-        className="site-header-inner"
-        style={{
-          maxWidth: 1120,
-          margin: "0 auto",
-          padding: "16px 24px",
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          rowGap: 10,
-        }}
-      >
+      {id}
+    </a>
+  ));
+
+  return (
+    <header ref={headerRef} className="site-header" data-open={open}>
+      <div className="container site-header-inner">
         <motion.a
           href="#top"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            color: "var(--fg)",
-            fontWeight: 700,
-            textDecoration: "none",
-          }}
+          className="site-logo mono"
           whileHover={reduceMotion ? undefined : { scale: 1.05 }}
           whileTap={tap}
           transition={SPRING}
         >
-          <motion.span
-            style={{
-              width: 9,
-              height: 9,
-              borderRadius: "50%",
-              background: "var(--accent)",
-            }}
-            whileHover={
-              reduceMotion
-                ? undefined
-                : {
-                    scale: 1.6,
-                    boxShadow: "0 0 10px 2px var(--accent)",
-                  }
-            }
-            transition={SPRING}
-          />
-          <span style={{ fontSize: 14 }}>
-            ameer<span style={{ color: "var(--accent)" }}>.lami</span>
-          </span>
+          <span className="site-logo-dot" />
+          ameer<span style={{ color: "var(--accent)" }}>.lami</span>
         </motion.a>
-        <nav
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 16,
-            rowGap: 10,
-            fontSize: 13,
-            color: "var(--muted)",
-          }}
-        >
-          {NAV_LINKS.map((id) => (
-            <motion.a
-              key={id}
-              className="navlink"
-              style={{
-                color: "var(--muted)",
-                textDecoration: "none",
-                position: "relative",
-              }}
-              href={`#${id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo(id);
-              }}
-              whileHover={reduceMotion ? undefined : { color: "var(--fg)" }}
-              whileTap={tap}
-              transition={SPRING}
-            >
-              {id}
-            </motion.a>
-          ))}
-          <motion.a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "var(--fg)",
-              textDecoration: "none",
-              border: "1px solid var(--border)",
-              borderRadius: 8,
-              padding: "8px 14px",
-              fontWeight: 700,
-            }}
-            whileHover={
-              reduceMotion ? undefined : { borderColor: "var(--accent)" }
-            }
-            whileTap={tap}
-            transition={SPRING}
-          >
+
+        <nav className="site-nav" aria-label="Primary">
+          {links}
+          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost site-resume">
             Resume
-          </motion.a>
-          <ThemeToggle />
+          </a>
         </nav>
+
+        <div className="site-header-tools">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="menu-btn"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span className="menu-btn-bar" />
+            <span className="menu-btn-bar" />
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            id="mobile-menu"
+            className="mobile-menu"
+            aria-label="Mobile"
+            initial={reduceMotion ? false : { opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="container mobile-menu-inner">
+              {links}
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Resume
+              </a>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

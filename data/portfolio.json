@@ -1,9 +1,21 @@
 {
   "stats": [
-    { "num": "2", "label": "years experience" },
-    { "num": "1.5M+", "label": "records managed" },
-    { "num": "10+", "label": "platforms integrated" },
-    { "num": "500K+", "label": "users served" }
+    {
+      "num": "1.5M+",
+      "label": "records managed"
+    },
+    {
+      "num": "500K+",
+      "label": "users served"
+    },
+    {
+      "num": "10+",
+      "label": "platforms integrated"
+    },
+    {
+      "num": "2",
+      "label": "years shipping"
+    }
   ],
   "services": [
     {
@@ -26,7 +38,12 @@
   "skillGroups": [
     {
       "label": "Languages",
-      "items": ["HTML", "CSS", "JavaScript", "TypeScript"]
+      "items": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript"
+      ]
     },
     {
       "label": "Front-end",
@@ -41,7 +58,12 @@
     },
     {
       "label": "UI Libraries",
-      "items": ["Tailwind CSS", "Shadcn", "Mantine UI", "Hero UI"]
+      "items": [
+        "Tailwind CSS",
+        "Shadcn",
+        "Mantine UI",
+        "Hero UI"
+      ]
     },
     {
       "label": "Back-end & Data",
@@ -61,45 +83,83 @@
       "title": "Technical Support System",
       "category": "SaaS",
       "desc": "Embedded live-chat SaaS integrated into 10+ production platforms. I built the agent dashboard — WebSocket real-time chat, ticketing, 4-language localization (Arabic, English, Sorani, Kurmanji) — and I'm building its web SDK.",
-      "tags": ["React 19", "WebSocket", "i18n", "Web SDK"]
+      "tags": [
+        "React 19",
+        "WebSocket",
+        "i18n",
+        "Web SDK"
+      ],
+      "metric": "10+",
+      "metricLabel": "production platforms"
     },
     {
       "idx": "PRJ-02",
       "title": "Dashboard Entrepreneurship",
       "category": "Gov",
       "desc": "Control panel for the Ministry of Higher Education managing 1.5M+ student and project records, with an approval workflow and role-based access for 50+ user roles.",
-      "tags": ["React", "RBAC", "Large tables"],
-      "link": "https://e.mohesr.gov.iq/ar"
+      "tags": [
+        "React",
+        "RBAC",
+        "Large tables"
+      ],
+      "link": "https://e.mohesr.gov.iq/ar",
+      "metric": "1.5M+",
+      "metricLabel": "student & project records"
     },
     {
       "idx": "PRJ-03",
       "title": "Riyada",
       "category": "Gov",
       "desc": "Admin dashboard for the Entrepreneurship Directorate managing 500,000+ users with 15+ permission levels, plus its bilingual Arabic/English landing page in Next.js.",
-      "tags": ["React", "Next.js", "Permissions", "ar/en"],
-      "link": "https://riyada.iq/en"
+      "tags": [
+        "React",
+        "Next.js",
+        "Permissions",
+        "ar/en"
+      ],
+      "link": "https://riyada.iq/en",
+      "metric": "500K+",
+      "metricLabel": "users"
     },
     {
       "idx": "PRJ-04",
       "title": "Archive Documents",
       "category": "Gov",
       "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer/exporter records, dual manager/employee panels, 8 permission tiers and fast search.",
-      "tags": ["React", "Mantine", "Search"]
+      "tags": [
+        "React",
+        "Mantine",
+        "Search"
+      ],
+      "metric": "85K+",
+      "metricLabel": "importer/exporter records"
     },
     {
       "idx": "PRJ-05",
       "title": "Hospital System",
       "category": "Product",
       "desc": "QR room-scanning and inventory tracking across 200+ rooms with real-time availability and role-based access for 15+ departments.",
-      "tags": ["React", "Realtime", "QR"]
+      "tags": [
+        "React",
+        "Realtime",
+        "QR"
+      ],
+      "metric": "200+",
+      "metricLabel": "rooms tracked live"
     },
     {
       "idx": "PRJ-06",
       "title": "Karwatt Taxi",
       "category": "Landing",
       "desc": "Landing page for a 100% electric taxi app, showcasing the eco-friendly fleet across interactive sections. Next.js, shipped with Docker + nginx.",
-      "tags": ["Next.js", "Docker", "EV"],
-      "link": "https://karwatt.taxi"
+      "tags": [
+        "Next.js",
+        "Docker",
+        "EV"
+      ],
+      "link": "https://karwatt.taxi",
+      "metric": "100%",
+      "metricLabel": "electric fleet"
     }
   ],
   "experience": [

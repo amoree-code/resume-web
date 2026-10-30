@@ -1,82 +1,91 @@
 # Design system
 
 The rules this portfolio is built on. The live, rendered version is the `/design` route
-(`app/design/page.tsx`); tokens live in `app/globals.css`. Change a token there, not inline.
+(`app/design/page.tsx`); tokens live on `:root` in `app/globals.css`. Change a token there, not inline.
 
 ## Principles
 
-1. **Proof over adjectives.** Numbers, stacks and live links sell the work — not words like
-   "pixel-perfect" or "passionate". Every figure on the site must be one he actually measured.
-2. **One accent.** Terracotta marks action and emphasis only: primary buttons, links, the
-   active state. Never decoration, never large fills.
-3. **Sans for reading, mono for data.** Prose and headings in Geist; labels, indices, nav and
-   code in Geist Mono. The Merienda script face appears in the hero signature lines and nowhere else.
-4. **Motion confirms, never decorates.** Every animation answers an action or a scroll
-   position, and all of it switches off under `prefers-reduced-motion`.
-5. **Bilingual-ready.** Use logical properties (`margin-inline-start`, `padding-inline`) so
-   an Arabic (RTL) version flips without rework.
+1. **Proof over adjectives.** Numbers, stacks and live links sell the work. Every figure on the
+   site must be one he actually measured.
+2. **One accent, one second voice.** Orange (`--accent`) marks action and emphasis; teal
+   (`--accent-2`) only appears in gradients and rails beside it. Never large fills.
+3. **Serif to speak, sans to read, mono for data.** Instrument Serif for headlines and the italic
+   accent word, Geist for prose, JetBrains Mono for labels, indices, tags and code.
+4. **Motion confirms, never decorates.** Every animation answers a load, a scroll position or a
+   pointer, and all of it stops under `prefers-reduced-motion`.
+5. **Fluid first, breakpoints by exception.** Sizes come from `clamp()` tokens; media queries are
+   mobile-first (`min-width`) and only change structure.
+6. **Bilingual-ready.** Logical properties (`padding-inline`, `margin-inline-start`) so an Arabic
+   RTL version flips without rework.
 
-## Color
+## Theme — Darkmatter (tweakcn)
 
-Both themes are defined on `:root` / `[data-theme="light"]` in `app/globals.css`.
+Source: `https://tweakcn.com/r/themes/darkmatter.json`. `--bg`, `--accent`, `--accent-2`, and the
+two foreground greys are the theme's own values. Adapted: `--panel` lifted a step off `--bg` so
+cards read as cards, `--fg` brightened for headings, and the light accent darkened (L .67 → .55)
+so accent text passes 4.5:1 on white.
 
-| Token      | Dark      | Light     | Use                                   |
-| ---------- | --------- | --------- | ------------------------------------- |
-| `--bg`     | `#202124` | `#f4f1ea` | page background                       |
-| `--panel`  | `#292a2d` | `#ffffff` | cards, tags, buttons at rest          |
-| `--border` | `#3c4043` | `#e2dacd` | hairlines, dividers, outlines         |
-| `--fg`     | `#e8eaed` | `#211e1a` | headings and body text                |
-| `--muted`  | `#9aa0a6` | `#6a655e` | secondary text, descriptions          |
-| `--faint`  | `#8f949a` | `#6f685f` | meta: indices, dates, footer          |
-| `--accent` | `#d97757` | `#c25e3f` | actions, links, active state          |
+| Token        | Dark                   | Light                  | Use                              |
+| ------------ | ---------------------- | ---------------------- | -------------------------------- |
+| `--bg`       | `oklch(.18 .004 308)`  | `oklch(.985 .002 264)` | page background                  |
+| `--panel`    | `oklch(.215 .004 308)` | `oklch(1 0 0)`         | cards, tags, resting buttons     |
+| `--border`   | `oklch(.295 0 0)`      | `oklch(.908 .006 264)` | hairlines, outlines              |
+| `--fg`       | `oklch(.95 0 0)`       | `oklch(.21 .032 265)`  | headings and body                |
+| `--muted`    | `oklch(.81 0 0)`       | `oklch(.44 .025 264)`  | secondary text                   |
+| `--faint`    | `oklch(.65 0 0)`       | `oklch(.51 .023 264)`  | meta: indices, dates, footer     |
+| `--accent`   | `oklch(.72 .134 50)`   | `oklch(.55 .137 45)`   | actions, links, active state     |
+| `--accent-fg`| `--bg` (dark)          | white                  | text on accent — never `#fff` on the dark accent |
+| `--accent-2` | `oklch(.68 .06 196)`   | `oklch(.54 .04 196)`   | gradients, rails                 |
 
-Tints of the accent are made with `color-mix(in srgb, var(--accent) N%, transparent)` —
-never a new hex.
-
-**Text on accent is `#141413`, not white.** White on `#d97757` is about 3.1:1 and fails AA
-for button-size text; `#141413` is about 6:1. (The current hero buttons still use white —
-fix when the hero is rebuilt.)
+Tints: `color-mix(in oklch, var(--accent) N%, transparent)` — never a new value. `--glow` is the
+pre-mixed accent haze for shadows and the card spotlight.
 
 ## Typography
 
-| Token           | Face         | Use                                          |
-| --------------- | ------------ | -------------------------------------------- |
-| `--font-sans`   | Geist        | body, headings (`--font-display` aliases it) |
-| `--font-mono`   | Geist Mono   | nav, section indicator, indices, code        |
-| `--font-script` | Merienda 900 | hero signature lines only                    |
+| Token            | Face             | Use                                        |
+| ---------------- | ---------------- | ------------------------------------------ |
+| `--font-display` | Instrument Serif | h1–h3, stat numbers, service numbers, marquee |
+| `--font-sans`    | Geist            | body copy, buttons                         |
+| `--font-mono`    | JetBrains Mono   | nav, eyebrows, tags, dates, code           |
 
-Scale (px): **11** meta · **12–13** labels, tags, small body · **14–16** body ·
-**20** card title · **32** section title · **40–48** display numbers ·
-`clamp(22px, 4vw, 40px)` hero lines. Headings `h1–h3` track at `-0.02em`.
-Body line-height 1.7.
+Fluid scale (320 → 1280px): `--text-xs` 11.5–12.5 · `--text-sm` 13.5–14.5 · `--text-body`
+15.7–17 · `--text-lg` 17.6–20.8 · `--text-h3` 23–32 · `--text-h2` 37–64 · `--text-h1` 46–112.
+Headings are weight 400 (the serif's only weight); emphasis comes from the italic accent, not
+bold. In a `SplitReveal` title, wrap the accent words in `*stars*`.
 
-## Layout and spacing
+## Layout and responsive
 
-- Container: `max-width: 1120px`, `padding-inline: 24px`.
-- Section rhythm: `110px` top / `70–90px` bottom on desktop.
-- Spacing steps: 4 · 8 · 10 · 14 · 24 · 30 — stay on these.
+- `.container`: `max-width: 1180px`, `padding-inline: var(--gutter)` (16 → 32px).
+- `.section`: `padding-block: var(--section-y)` (64 → 128px).
+- Breakpoints (mobile-first, structural only): **640** hero buttons stop stretching · **720**
+  tool groups go three-column · **768** desktop nav replaces the menu button, experience rail
+  moves to the centre, services widen · **900** hero stats go 2×2 → 4 across · **1440** section
+  indicator appears.
+- Work cards use a **container query**: at ≥520px of card width the metric sits beside the copy.
+- Tap targets ≥ 44px; heights use `svh` with a `vh` fallback; overflow clipping uses `clip`, never
+  `hidden`, on anything that wraps the sticky header.
 
 ## Radius
 
-| Value | Use                     |
-| ----- | ----------------------- |
-| 4–6   | category chips          |
-| 8     | tags                    |
-| 9–10  | buttons, inputs         |
-| 18–20 | cards, hero frame       |
-| 999   | pills, status badge     |
+`--radius` .75rem — buttons, menu button, theme toggle · ×1.6 — work cards · ×2 — contact card ·
+6–8px — chips and tags · 999px — pills, filter bar, badge.
 
 ## Motion
 
-- Hover / tap: Framer spring `{ stiffness: 300, damping: 20 }`, lift `y: -4`, tap `scale: .95`.
-- Scroll reveals: GSAP `power2.out`, scrubbed between `top 75%` and `top 35%`.
-- Entrances: `power3.out`, 0.5–0.8s. Smooth scroll: Lenis.
-- `prefers-reduced-motion: reduce` → set final state immediately, no transitions.
+| Pattern            | Where                         | How                                              |
+| ------------------ | ----------------------------- | ------------------------------------------------ |
+| Split-word reveal  | hero h1, every section title  | `SplitReveal` — words rise from a clip, `power4.out`, 0.06s stagger |
+| Blur-up entrance   | hero badge, lead, actions     | `HeroEnter` — opacity + y + blur, 0.12s stagger  |
+| Count-up           | hero stats                    | `CountUp` — 1.6s ease-out when in view, once     |
+| Aurora             | hero background               | two blurred orbs drifting on 14s / 18s loops     |
+| Scroll progress    | top of viewport               | `ScrollProgress` — spring-smoothed `scaleX`      |
+| Card spotlight     | work cards                    | pointer-tracked radial glow via `--mx` / `--my`  |
+| Filter pill        | work filters                  | Framer `layoutId` slide; cards re-flow with `layout` |
+| Scrubbed rows      | services, experience rail     | GSAP ScrollTrigger scrub                         |
+| Hover lift         | buttons, chips, socials       | `translateY(-2…-3px)`, spring `{300, 20}`        |
 
-## Components
-
-Rendered in `/design`: buttons (primary, secondary, icon), status badge, category chip,
-tag, project row, stat, section heading. Reuse these — a new variant needs a reason.
+Reduced motion: GSAP effects return early, Framer variants are disabled, CSS animations are cut
+to 0.01ms, the aurora and marquee stop.
 
 ## Content rules
 

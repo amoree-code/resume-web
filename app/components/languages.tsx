@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Reveal from "./reveal";
+import SplitReveal from "./split-reveal";
 import type { SkillGroup } from "@/lib/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -95,45 +95,17 @@ export default function Languages({ skillGroups }: { skillGroups: SkillGroup[] }
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        maxWidth: 1120,
-        margin: "0 auto",
-        padding: "40px 24px 70px",
-        position: "relative",
-      }}
-    >
-      <Reveal>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 34 }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: 32,
-              margin: 0,
-            }}
-          >
-            Languages &amp; Tools
-          </h2>
-          <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+    <section ref={sectionRef} className="container section" style={{ position: "relative" }}>
+      <div className="section-head">
+        <div>
+          <p className="eyebrow" style={{ margin: "0 0 12px" }}>Stack</p>
+          <SplitReveal className="section-title" text={"Languages & *tools.*"} />
         </div>
-      </Reveal>
+      </div>
 
-      <div ref={listRef} style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+      <div ref={listRef} className="lang-list">
         {skillGroups.map((g) => (
-          <div
-            key={g.label}
-            className="lang-row"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "auto 160px 1fr",
-              alignItems: "center",
-              gap: 20,
-              padding: "18px 0",
-              borderTop: "1px solid var(--border)",
-            }}
-          >
+          <div key={g.label} className="lang-row">
             <svg
               className="lang-icon"
               width="28"
@@ -148,30 +120,10 @@ export default function Languages({ skillGroups }: { skillGroups: SkillGroup[] }
             >
               <path d={GROUP_ICONS[g.label] ?? "M4 12h16"} />
             </svg>
-            <div
-              style={{
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "1.5px",
-                color: "var(--faint)",
-              }}
-            >
-              {g.label}
-            </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <div className="eyebrow lang-label">{g.label}</div>
+            <div className="lang-chips">
               {g.items.map((sk) => (
-                <span
-                  key={sk}
-                  className="lang-chip"
-                  style={{
-                    fontSize: 12,
-                    border: "1px solid var(--border)",
-                    background: "var(--panel)",
-                    borderRadius: 8,
-                    padding: "7px 12px",
-                    color: "var(--fg)",
-                  }}
-                >
+                <span key={sk} className="lang-chip mono">
                   {sk}
                 </span>
               ))}
