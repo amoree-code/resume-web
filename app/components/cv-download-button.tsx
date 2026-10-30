@@ -19,7 +19,7 @@ export default function CvDownloadButton() {
 
     const link = document.createElement("a");
     link.href = "/resume.pdf";
-    link.download = "Amir-Abdulkarim-Jabbar-CV.pdf";
+    link.download = "Ameer-Abdulkareem-Jabbar-Lami-CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

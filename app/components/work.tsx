@@ -132,7 +132,7 @@ export default function Work({ projects }: { projects: Project[] }) {
         >
           <h2
             style={{
-              fontFamily: "var(--font-merienda), cursive",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: 32,
               margin: 0,
@@ -221,7 +221,7 @@ export default function Work({ projects }: { projects: Project[] }) {
               </div>
               <h3
                 style={{
-                  fontFamily: "var(--font-merienda), cursive",
+                  fontFamily: "var(--font-display)",
                   fontWeight: 700,
                   fontSize: 20,
                   margin: "0 0 8px",
@@ -257,6 +257,22 @@ export default function Work({ projects }: { projects: Project[] }) {
                     {tag}
                   </span>
                 ))}
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: 11,
+                      color: "var(--accent)",
+                      textDecoration: "none",
+                      padding: "5px 2px",
+                      marginInlineStart: "auto",
+                    }}
+                  >
+                    Visit live ↗
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>

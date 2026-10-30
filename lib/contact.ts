@@ -7,7 +7,7 @@ export type ContactLink = {
 export const CONTACT_LINKS: ContactLink[] = [
   {
     label: 'Email',
-    href: 'mailto:amir.abdulkarim.jabbar@gmail.com',
+    href: 'mailto:ameer.abdulkareem.lami@gmail.com',
     iconPath:
       'M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm1.8.4 6.62 5.14a1 1 0 0 0 1.16 0L19.2 6.9M4 7v10.5h16V7l-7.4 5.75a2 2 0 0 1-2.4 0L4 7Z',
   },
@@ -19,7 +19,7 @@ export const CONTACT_LINKS: ContactLink[] = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/amer-abdulkareem',
+    href: 'https://www.linkedin.com/in/ameer-abdulkareem',
     iconPath:
       'M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.75h3.5V21H3.2V8.75Zm6.2 0h3.36v1.68h.05c.47-.88 1.6-1.8 3.3-1.8 3.53 0 4.18 2.32 4.18 5.33V21h-3.5v-6.36c0-1.52-.03-3.47-2.11-3.47-2.12 0-2.45 1.65-2.45 3.36V21H9.4V8.75Z',
   },

@@ -14,12 +14,12 @@ import { getPortfolioData } from '@/lib/portfolio';
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Amir Abdulkarim Jabbar',
+  name: 'Ameer Abdulkareem Jabbar Lami',
   jobTitle: 'Front-end Developer',
-  email: 'mailto:amir.abdulkarim.jabbar@gmail.com',
+  email: 'mailto:ameer.abdulkareem.lami@gmail.com',
   telephone: '+9647777665783',
-  url: 'https://amir.dev',
-  sameAs: [],
+  url: 'https://cv-ameer.vercel.app',
+  sameAs: ['https://github.com/amoree-code', 'https://www.linkedin.com/in/ameer-abdulkareem'],
 };
 
 export default function Home() {

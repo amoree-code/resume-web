@@ -108,7 +108,7 @@ export default function Languages({ skillGroups }: { skillGroups: SkillGroup[] }
         <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 34 }}>
           <h2
             style={{
-              fontFamily: "var(--font-merienda), cursive",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: 32,
               margin: 0,

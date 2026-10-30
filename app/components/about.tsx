@@ -73,7 +73,7 @@ export default function About({ services }: { services: Service[] }) {
         >
           <h2
             style={{
-              fontFamily: "var(--font-merienda), cursive",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: 32,
               margin: 0,
@@ -129,7 +129,7 @@ export default function About({ services }: { services: Service[] }) {
             <div
               className="service-num"
               style={{
-                fontFamily: "var(--font-merienda), cursive",
+                fontFamily: "var(--font-display)",
                 fontSize: 48,
                 fontWeight: 700,
                 color: "var(--accent)",
@@ -140,7 +140,7 @@ export default function About({ services }: { services: Service[] }) {
             <div className="service-content">
               <h3
                 style={{
-                  fontFamily: "var(--font-merienda), cursive",
+                  fontFamily: "var(--font-display)",
                   fontWeight: 700,
                   fontSize: 26,
                   margin: "0 0 12px",

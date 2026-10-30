@@ -100,7 +100,7 @@ export default function Header() {
             transition={SPRING}
           />
           <span style={{ fontSize: 14 }}>
-            amir<span style={{ color: "var(--accent)" }}>.dev</span>
+            ameer<span style={{ color: "var(--accent)" }}>.lami</span>
           </span>
         </motion.a>
         <nav

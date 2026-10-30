@@ -16,12 +16,12 @@ export default function Footer() {
         borderTop: "1px solid var(--border)",
       }}
     >
-      <span>© 2026 Amir Abdulkarim Jabbar</span>
+      <span>© 2026 Ameer Abdulkareem Jabbar Lami</span>
       <a
         href={emailLink.href}
         style={{ color: "var(--faint)", textDecoration: "none" }}
       >
-        amir.abdulkarim.jabbar@gmail.com
+        ameer.abdulkareem.lami@gmail.com
       </a>
     </footer>
   );

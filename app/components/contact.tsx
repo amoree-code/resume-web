@@ -54,7 +54,7 @@ export default function Contact() {
               </div>
               <h2
                 style={{
-                  fontFamily: "var(--font-merienda), cursive",
+                  fontFamily: "var(--font-display)",
                   fontWeight: 900,
                   fontSize: 40,
                   margin: "0 0 16px",

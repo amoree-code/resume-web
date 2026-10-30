@@ -69,7 +69,7 @@ export default function Experience({
         >
           <h2
             style={{
-              fontFamily: "var(--font-merienda), cursive",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: 32,
               margin: 0,

@@ -85,7 +85,7 @@ export default function Hero() {
             data-enter-rotate="-2"
             className="hero-el hero-title-1"
             style={{
-              fontFamily: 'var(--font-merienda), cursive',
+              fontFamily: 'var(--font-script)',
               fontWeight: 900,
               fontSize: 'clamp(22px, 4vw, 40px)',
               lineHeight: 1.05,
@@ -104,7 +104,7 @@ export default function Hero() {
             data-enter-rotate="3"
             className="hero-el hero-title-2"
             style={{
-              fontFamily: 'var(--font-merienda), cursive',
+              fontFamily: 'var(--font-script)',
               fontWeight: 900,
               fontSize: 'clamp(22px, 4vw, 40px)',
               lineHeight: 1.05,
@@ -128,7 +128,7 @@ export default function Hero() {
               margin: 0,
             }}
           >
-            Amir Abdulkarim Jabbar. Front-end-focused Full Stack Developer
+            Ameer Abdulkareem Jabbar Lami. Front-end-focused Full Stack Developer
             turning ideas into clean, fast, dependable web products.
           </p>
 

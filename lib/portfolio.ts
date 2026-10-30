@@ -9,6 +9,7 @@ export type Project = {
   category: string;
   desc: string;
   tags: string[];
+  link?: string;
 };
 export type Experience = {
   company: string;
