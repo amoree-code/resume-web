@@ -12,7 +12,7 @@ const CODE_LINES = [
   { w: "38%", c: "var(--accent)" },
   { w: "62%", c: "var(--faint)" },
   { w: "51%", c: "var(--faint)" },
-  { w: "44%", c: "var(--blue, #7fb2e0)" },
+  { w: "44%", c: "var(--accent-2)" },
   { w: "58%", c: "var(--faint)" },
   { w: "29%", c: "var(--accent)" },
 ];

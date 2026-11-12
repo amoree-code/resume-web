@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "./reveal";
+import SplitReveal from "./split-reveal";
 import type { Service } from "@/lib/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +24,7 @@ export default function About({ services }: { services: Service[] }) {
       rows.forEach((row) => {
         const num = row.querySelector(".service-num");
         const content = row.querySelector(".service-content");
+        const line = row.querySelector(".service-line");
         if (!num || !content) return;
         if (reduceMotionMq) {
           gsap.set([num, content], { opacity: 1, x: 0, scale: 1 });
@@ -32,15 +34,17 @@ export default function About({ services }: { services: Service[] }) {
           .timeline({
             scrollTrigger: {
               trigger: row,
-              start: "top 75%",
-              end: "top 35%",
+              start: "top 85%",
+              end: "top 45%",
               scrub: 0.6,
             },
           })
+          .fromTo(line, { scaleX: 0 }, { scaleX: 1, ease: "none" })
           .fromTo(
             num,
             { opacity: 0, scale: 0.6, x: -20 },
-            { opacity: 1, scale: 1, x: 0, ease: "power2.out" }
+            { opacity: 1, scale: 1, x: 0, ease: "power2.out" },
+            "<"
           )
           .fromTo(
             content,
@@ -54,62 +58,27 @@ export default function About({ services }: { services: Service[] }) {
   }, []);
 
   return (
-    <section
-      id="about"
-      style={{
-        maxWidth: 1120,
-        margin: "0 auto",
-        padding: "110px 24px 70px",
-      }}
-    >
-      <Reveal>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: 14,
-            marginBottom: 30,
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-merienda), cursive",
-              fontWeight: 700,
-              fontSize: 32,
-              margin: 0,
-            }}
-          >
-            What I do
-          </h2>
-          <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+    <section id="about" className="container section">
+      <div className="section-head">
+        <div>
+          <p className="eyebrow" style={{ margin: "0 0 12px" }}>01 — What I do</p>
+          <SplitReveal className="section-title" text="Interfaces that *hold up.*" />
         </div>
-      </Reveal>
+      </div>
 
       <Reveal>
-        <div
-          style={{
-            fontSize: 14,
-            color: "var(--muted)",
-            lineHeight: 1.85,
-            maxWidth: 720,
-            marginBottom: 40,
-          }}
-        >
+        <div className="lead" style={{ marginBottom: "clamp(32px, 5vw, 56px)" }}>
           <p style={{ margin: "0 0 16px" }}>
             I care about interfaces that feel effortless — clean, fast, and
-            easy to use. I&apos;m just as comfortable working across the full
+            easy to use — and I&apos;m just as comfortable across the full
             stack, taking a product from idea to something real people use.
           </p>
           <p style={{ margin: 0 }}>
-            I&apos;ve built large-scale government platforms handling{" "}
-            <span style={{ color: "var(--fg)" }}>1.5M+ records</span>,
-            embedded SaaS products used across{" "}
-            <span style={{ color: "var(--fg)" }}>
-              10+ production platforms
-            </span>
+            I&apos;ve built government platforms handling{" "}
+            <span style={{ color: "var(--fg)" }}>1.5M+ records</span>, an
+            embedded SaaS used across{" "}
+            <span style={{ color: "var(--fg)" }}>10+ production platforms</span>
             , and real-time systems serving hundreds of thousands of people.
-            I focus on writing code that performs well and that a team can
-            actually maintain and grow.
           </p>
         </div>
       </Reveal>
@@ -119,47 +88,14 @@ export default function About({ services }: { services: Service[] }) {
           <motion.div
             key={service.title}
             className="service-row"
-            style={{
-              minHeight: "48vh",
-              borderTop: i === 0 ? "none" : "1px solid var(--border)",
-            }}
             whileHover={reduceMotion ? undefined : { x: 6 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <div
-              className="service-num"
-              style={{
-                fontFamily: "var(--font-merienda), cursive",
-                fontSize: 48,
-                fontWeight: 700,
-                color: "var(--accent)",
-              }}
-            >
-              {String(i + 1).padStart(2, "0")}
-            </div>
+            <span className="service-line" aria-hidden="true" />
+            <div className="service-num">{String(i + 1).padStart(2, "0")}</div>
             <div className="service-content">
-              <h3
-                style={{
-                  fontFamily: "var(--font-merienda), cursive",
-                  fontWeight: 700,
-                  fontSize: 26,
-                  margin: "0 0 12px",
-                  color: "var(--fg)",
-                }}
-              >
-                {service.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: 14,
-                  color: "var(--muted)",
-                  lineHeight: 1.8,
-                  maxWidth: 620,
-                  margin: 0,
-                }}
-              >
-                {service.description}
-              </p>
+              <h3 className="service-title">{service.title}</h3>
+              <p className="service-desc">{service.description}</p>
             </div>
           </motion.div>
         ))}

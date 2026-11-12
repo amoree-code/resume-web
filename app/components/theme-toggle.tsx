@@ -1,27 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+export const THEME_KEY = "portfolio-theme";
 
-  useEffect(() => {
-    const saved = localStorage.getItem("amir-portfolio-theme");
-    const t =
-      (saved as "dark" | "light" | null) ??
-      (window.matchMedia("(prefers-color-scheme: light)").matches
-        ? "light"
-        : "dark");
-    setTheme(t);
-    document.documentElement.setAttribute("data-theme", t);
-  }, []);
+type Theme = "dark" | "light";
+
+// <html data-theme> is set before paint by the inline script in layout.tsx;
+// this component only reads and flips it.
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
+const getTheme = (): Theme =>
+  document.documentElement.dataset.theme === "light" ? "light" : "dark";
+
+export default function ThemeToggle() {
+  const theme = useSyncExternalStore<Theme>(subscribe, getTheme, () => "dark");
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("amir-portfolio-theme", next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {}
   };
 
   const reduceMotion = useReducedMotion();
@@ -33,9 +37,9 @@ export default function ThemeToggle() {
       aria-pressed={theme === "light"}
       style={{
         cursor: "pointer",
-        width: 38,
-        height: 38,
-        borderRadius: 9,
+        width: 44,
+        height: 44,
+        borderRadius: "var(--radius)",
         border: "1px solid var(--border)",
         background: "var(--panel)",
         color: "var(--fg)",

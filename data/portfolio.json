@@ -1,33 +1,30 @@
 {
+  "summary": "Front-end-focused Full Stack Developer with 2 years of experience building production web applications for government, enterprise, and SaaS products — React, Next.js, Vue.js, TypeScript, WebSocket systems, role-based access control, and multilingual RTL interfaces, with practical back-end experience in Node.js, NestJS, and SQL databases.",
   "stats": [
-    { "num": "3+", "label": "years experience" },
     { "num": "1.5M+", "label": "records managed" },
-    { "num": "10+", "label": "platforms shipped" },
-    { "num": "500K+", "label": "users served" }
+    { "num": "500K+", "label": "users served" },
+    { "num": "10+", "label": "platforms integrated" },
+    { "num": "2", "label": "years shipping" }
   ],
   "services": [
     {
-      "title": "Full-stack Developer",
-      "description": "End-to-end ownership from database schema to pixel-perfect UI — shipping features that hold up in production, not just in a demo. I move fluidly between backend services, APIs, and the interface that sits on top of them, so nothing gets lost in translation between layers. That means fewer handoffs, fewer misunderstandings between 'what the API returns' and 'what the UI expects', and a product that feels coherent because one person understood it end to end. I've taken products from a blank repository to a live platform serving hundreds of thousands of users, and I know the difference between code that merely works and code a team can keep shipping against for years."
+      "title": "Dashboards at scale",
+      "description": "Control panels over millions of records — large tables, approval workflows, and role-based access with dozens of roles and fine-grained permission levels."
     },
     {
-      "title": "Web Development",
-      "description": "Fast, accessible, responsive web apps built with modern frameworks — React, Next.js, and the tools around them. I care about the fundamentals that make a site feel instant: minimal bundle weight, correct semantic HTML, keyboard and screen-reader support, and layouts that hold up from a small phone to an ultrawide monitor without falling apart. Performance budgets aren't an afterthought bolted on before launch — they're a constraint I design against from the first component. The result is a site that loads fast, scores well on Lighthouse, and actually works for every visitor, not just the ones on a fast connection with a new device."
+      "title": "Real-time systems",
+      "description": "WebSocket live chat and ticketing integrated into 10+ production platforms, live room and inventory availability, and embeddable widgets that run on any host site."
     },
     {
-      "title": "Advanced Solutions",
-      "description": "Real-time systems, large-scale data, and custom integrations — the problems that don't have a copy-paste answer. This is where I've spent most of my career: WebSocket-driven live chat serving 10+ production platforms, government dashboards managing 1.5M+ records with fine-grained role-based access, and inventory systems tracking real-time state across hundreds of physical locations. These aren't CRUD apps with a nice UI — they're systems where correctness, concurrency, and scale actually matter, and where a wrong assumption early on becomes very expensive later. I like this kind of work precisely because it demands thinking past the obvious solution."
+      "title": "Arabic-first, multilingual UI",
+      "description": "RTL and LTR from one codebase, localized in Arabic, English, Sorani, and Kurmanji — planned from the first commit, not retrofitted."
     },
     {
-      "title": "Code Optimization",
-      "description": "Profiling and refining code for speed, maintainability, and long-term scalability, so it stays fast as it grows. I treat performance as a measurable property, not a feeling — profiling first, guessing never — and I look for the root cause of slowness rather than papering over symptoms with more hardware or more caching. The same discipline applies to maintainability: reducing duplication, naming things so the next person doesn't have to guess, and keeping components small enough to actually reason about. Code that's fast today and unreadable tomorrow isn't a win; the goal is a codebase a team can keep moving fast in, six months and six features from now."
+      "title": "Full stack when it's needed",
+      "description": "Node.js, NestJS, Express, and Prisma over PostgreSQL, MySQL, or MongoDB — so the API and the interface on top of it are designed together."
     }
   ],
   "skillGroups": [
-    {
-      "label": "Languages",
-      "items": ["HTML", "CSS", "JavaScript", "TypeScript"]
-    },
     {
       "label": "Front-end",
       "items": [
@@ -35,22 +32,56 @@
         "Next.js",
         "Vue.js",
         "Redux Toolkit",
+        "TanStack Query & Router",
+        "Vite",
         "Framer Motion"
       ]
     },
     {
-      "label": "UI Libraries",
-      "items": ["Tailwind CSS", "Shadcn", "Mantine UI", "Hero UI"]
-    },
-    {
-      "label": "Back-end & Data",
+      "label": "Back-end",
       "items": [
         "Node.js",
-        "Nest.js",
+        "NestJS",
         "Express",
-        "Prisma",
-        "PostgreSQL",
-        "MongoDB"
+        "REST APIs",
+        "WebSocket",
+        "Prisma ORM",
+        "Sequelize"
+      ]
+    },
+    {
+      "label": "Databases",
+      "items": ["PostgreSQL", "MySQL", "MongoDB"]
+    },
+    {
+      "label": "Languages",
+      "items": ["HTML", "CSS", "JavaScript", "TypeScript"]
+    },
+    {
+      "label": "UI Libraries",
+      "items": ["Tailwind CSS", "shadcn/ui", "Mantine UI", "Hero UI"]
+    },
+    {
+      "label": "Localization",
+      "items": [
+        "RTL layouts",
+        "i18n",
+        "Arabic",
+        "English",
+        "Sorani",
+        "Kurmanji"
+      ]
+    },
+    {
+      "label": "Tools",
+      "items": [
+        "Git & GitHub",
+        "Docker",
+        "nginx",
+        "Mapbox GL",
+        "Postman",
+        "Swagger",
+        "Apidog"
       ]
     }
   ],
@@ -59,64 +90,86 @@
       "idx": "PRJ-01",
       "title": "Technical Support System",
       "category": "SaaS",
-      "desc": "Embedded live-chat SaaS integrated into 10+ platforms — WebSocket real-time chat, bot self-service, full ticketing, 4-language localization and themeable UI.",
-      "tags": ["WebSocket", "Material 3", "i18n"]
+      "desc": "Real-time customer communication platform. Built the agent dashboard — WebSocket live chat, ticketing for hundreds of daily tickets, 4-language localization — and building its Web SDK: a framework-agnostic TypeScript chat widget isolated in Shadow DOM, shipped as an npm package and versioned CDN script.",
+      "tags": ["React", "WebSocket", "TypeScript", "Shadow DOM", "i18n"],
+      "metric": "10+",
+      "metricLabel": "production platforms"
     },
     {
       "idx": "PRJ-02",
       "title": "Dashboard Entrepreneurship",
       "category": "Gov",
-      "desc": "Control panel for the Ministry of Higher Education managing 1.5M+ student and project records with role-based access for 50+ user roles.",
-      "tags": ["Next.js", "RBAC", "Scale"]
+      "desc": "Ministry of Higher Education control panel managing 1.5M+ student and project records, with role-based access for 50+ user roles, a streamlined project review workflow, and messaging handling thousands of messages a day.",
+      "tags": ["React", "RBAC", "Large tables", "Messaging"],
+      "link": "https://e.mohesr.gov.iq/ar",
+      "metric": "1.5M+",
+      "metricLabel": "student & project records"
     },
     {
       "idx": "PRJ-03",
-      "title": "Dashboard Riyada",
+      "title": "Riyada",
       "category": "Gov",
-      "desc": "Admin panel for the Entrepreneurship Directorate managing 500,000+ users with fine-grained permissions across 15+ levels.",
-      "tags": ["React", "Permissions"]
+      "desc": "Entrepreneurship Directorate admin dashboard managing data for 500,000+ users with dynamic roles across 15+ permission levels, plus the public landing page in Next.js with Arabic and English localization.",
+      "tags": ["React", "Vite", "Next.js", "Permissions", "ar/en"],
+      "link": "https://riyada.iq/en",
+      "metric": "500K+",
+      "metricLabel": "users"
     },
     {
       "idx": "PRJ-04",
       "title": "Archive Documents",
       "category": "Gov",
-      "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer/exporter records, dual manager/employee panels, fast search.",
-      "tags": ["Search", "8 tiers"]
+      "desc": "Baghdad Chamber of Commerce document archive: 85,000+ importer and exporter records with fast search, separate manager and employee panels, 8 permission tiers, and the platform landing page.",
+      "tags": ["React", "Vite", "Mantine", "Hero UI", "Search"],
+      "metric": "85K+",
+      "metricLabel": "importer & exporter records"
     },
     {
       "idx": "PRJ-05",
       "title": "Hospital System",
       "category": "Product",
-      "desc": "Room-scanning and inventory tracking across 200+ rooms with real-time availability and role-based access for 15+ departments.",
-      "tags": ["Realtime", "Inventory"]
+      "desc": "QR-based room scanning and inventory tracking across 200+ rooms, with real-time availability of rooms, equipment and items, and role-based access for staff across 15+ departments.",
+      "tags": ["React", "Vite", "React Query", "JWT", "QR"],
+      "metric": "200+",
+      "metricLabel": "rooms tracked live"
     },
     {
       "idx": "PRJ-06",
-      "title": "Electronic Voting Dashboard",
-      "category": "Product",
-      "desc": "Integrated voting + reporting panel at the scale of tens of thousands of voters, real-time results, and 15+ customizable reports.",
-      "tags": ["Realtime", "Analytics"]
+      "title": "Karwatt Taxi",
+      "category": "Landing",
+      "desc": "Responsive landing page for a fully electric taxi platform serving 50K+ monthly visitors, deployed with Docker and nginx.",
+      "tags": ["Next.js", "Docker", "nginx"],
+      "link": "https://karwatt.taxi",
+      "metric": "50K+",
+      "metricLabel": "monthly visitors"
     },
     {
       "idx": "PRJ-07",
-      "title": "Riyada",
-      "category": "Landing",
-      "desc": "Landing page for the Entrepreneurship Directorate platform — 95+ Lighthouse score, responsive across 4 feature sections, +120% organic traffic.",
-      "tags": ["SEO", "Performance"]
+      "title": "Kar Dashboard",
+      "category": "Product",
+      "desc": "Admin dashboard for a ride-hailing platform — multi-tenant, localized in English, Arabic and Sorani, with Mapbox maps.",
+      "tags": ["React 19", "Vite", "TanStack Query", "shadcn/ui", "Mapbox GL"]
     },
     {
       "idx": "PRJ-08",
-      "title": "Karwatt Taxi",
-      "category": "Landing",
-      "desc": "Landing page for a 100% electric taxi app with 50K+ monthly visitors, showcasing an eco-friendly fleet across interactive sections — +85% signups.",
-      "tags": ["EV", "Conversion"]
+      "title": "Tajer Baghdad",
+      "category": "Gov",
+      "desc": "Certificate of Origin portal for Baghdad traders — an Arabic-first, right-to-left interface.",
+      "tags": ["Vue 3", "Element Plus", "Bootstrap", "RTL"]
     },
     {
       "idx": "PRJ-09",
-      "title": "Tajr Platform",
-      "category": "Landing",
-      "desc": "Landing page for the import/export document archive system serving 85K+ users, 5 key feature sections for Baghdad Chamber of Commerce — 40% adoption.",
-      "tags": ["Gov", "Adoption"]
+      "title": "EPMS Dashboard",
+      "category": "Product",
+      "desc": "Internal dashboard for LightRing built on a typed OpenAPI client, with i18next localization.",
+      "tags": ["React", "Vite", "TypeScript", "i18next", "OpenAPI"]
+    },
+    {
+      "idx": "PRJ-10",
+      "title": "Dynamic Resume Platform",
+      "category": "Personal",
+      "desc": "A dynamic resume platform: a NestJS + Prisma API with a Next.js front end.",
+      "tags": ["NestJS", "Prisma", "Next.js"]
     }
   ],
   "experience": [
@@ -125,19 +178,19 @@
       "role": "Front-end Developer",
       "dates": "Sep 2025 – Present",
       "points": [
-        "Build and maintain responsive web apps with React and Next.js",
-        "Implement pixel-perfect UI with designers; improved load time 40% via optimization and lazy loading",
-        "Ensure cross-browser compatibility and mobile-first responsive design"
+        "Build and maintain responsive dashboards and landing pages for the company's client platforms — RCCM, Riyada and Karwatt",
+        "Built the agent dashboard of the Technical Support System (live chat, tickets, 4-language i18n) and now building its Web SDK",
+        "Work with designers on pixel-perfect UI, cross-browser and mobile-first; React 19, Vite, TanStack, Tailwind, shadcn/ui and Next.js"
       ]
     },
     {
-      "company": "Lightring Technology",
+      "company": "LightRing Technology",
       "role": "Front-end Developer",
       "dates": "Jul 2025 – Aug 2025",
       "points": [
-        "Developed reusable React components for internal dashboard systems",
-        "Integrated RESTful APIs and managed state with Redux Toolkit",
-        "Delivered 5+ projects on tight deadlines while maintaining code quality"
+        "Built the Ministry of Higher Education dashboard over 1.5M+ records and 50+ user roles",
+        "Developed reusable interface components for internal dashboard systems, including EPMS",
+        "Integrated backend services through a typed OpenAPI client and managed complex application state with the backend team"
       ]
     },
     {
@@ -145,10 +198,22 @@
       "role": "Front-end Developer",
       "dates": "Feb 2025 – Jul 2025",
       "points": [
-        "Built interactive UIs with React and Tailwind CSS, mobile-first across all sizes",
-        "Conducted code reviews and mentored 3 junior developers",
-        "Improved performance and SEO through optimization and best practices"
+        "Built the Baghdad Chamber of Commerce document archive — 85,000+ records, 8 permission tiers",
+        "Developed interactive, mobile-first interfaces across all device sizes with React, Mantine and Hero UI",
+        "Improved website performance and SEO through optimization and best practices"
       ]
     }
+  ],
+  "education": [
+    {
+      "title": "High School Diploma",
+      "place": "Al-Quds School",
+      "dates": "2026",
+      "note": "Media Technology track"
+    }
+  ],
+  "spokenLanguages": [
+    { "name": "Arabic", "level": "Native" },
+    { "name": "English", "level": "Intermediate (B1)" }
   ]
 }

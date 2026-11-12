@@ -7,6 +7,7 @@ import Marquee from './components/marquee';
 import SectionIndicator from './components/section-indicator';
 import Work from './components/work';
 import Experience from './components/experience';
+import Education from './components/education';
 import Contact from './components/contact';
 import Footer from './components/footer';
 import { getPortfolioData } from '@/lib/portfolio';
@@ -14,34 +15,36 @@ import { getPortfolioData } from '@/lib/portfolio';
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Amir Abdulkarim Jabbar',
+  name: 'Ameer Abdulkareem Jabbar Lami',
   jobTitle: 'Front-end Developer',
-  email: 'mailto:amir.abdulkarim.jabbar@gmail.com',
+  email: 'mailto:ameer.abdulkareem.lami@gmail.com',
   telephone: '+9647777665783',
-  url: 'https://amir.dev',
-  sameAs: [],
+  url: 'https://cv-ameer.vercel.app',
+  sameAs: ['https://github.com/amoree-code', 'https://www.linkedin.com/in/ameer-abdulkareem'],
 };
 
 export default function Home() {
-  const { skillGroups, services, projects, experience } = getPortfolioData();
+  const { stats, skillGroups, services, projects, experience, education, spokenLanguages } =
+    getPortfolioData();
 
   return (
-    <div style={{ minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100svh', overflowX: 'clip' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <SectionIndicator />
       <Header />
-      <Hero />
+      <Hero stats={stats} />
       <About services={services} />
       <Languages skillGroups={skillGroups} />
-      <section style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px 90px' }}>
+      <section className="container" style={{ paddingBottom: 'var(--section-y)' }}>
         <Workspace />
       </section>
       <Marquee items={services.map((s) => s.title)} />
       <Experience experience={experience} />
       <Work projects={projects} />
+      <Education education={education} spokenLanguages={spokenLanguages} />
       <Contact />
       <Footer />
     </div>

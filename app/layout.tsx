@@ -1,39 +1,59 @@
-import type { Metadata } from 'next';
-import { Merienda } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Geist, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import SmoothScroll from './components/smooth-scroll';
 import ParticleField from './components/particle-field';
 import Cursor from './components/cursor';
+import ScrollProgress from './components/scroll-progress';
+import Magnetic from './components/magnetic';
 import './globals.css';
 
-const merienda = Merienda({
-  variable: '--font-merienda',
-  weight: ['400', '500', '600', '700', '900'],
+const geist = Geist({
+  variable: '--font-geist',
   subsets: ['latin'],
 });
 
-const title = 'Amir Abdulkarim Jabbar — Front-end Developer';
+// Display face: headings and the italic accent words.
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-instrument',
+  weight: '400',
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+});
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1a181b',
+};
+
+const title = 'Ameer Abdulkareem Jabbar Lami — Front-end Developer';
 const description =
-  'Front-end-focused Full Stack Developer with 3 years of experience turning ideas and designs into clean, fast, dependable web products — from large-scale government dashboards to real-time SaaS used by hundreds of thousands.';
+  'Front-end-focused Full Stack Developer with 2 years of experience turning ideas and designs into clean, fast, dependable web products — from large-scale government dashboards to real-time SaaS used by hundreds of thousands.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://amir.dev'),
+  metadataBase: new URL('https://cv-ameer.vercel.app'),
   title,
   description,
   keywords: [
-    'Amir Abdulkarim Jabbar',
+    'Ameer Abdulkareem Jabbar Lami',
     'Front-end Developer',
     'Full Stack Developer',
     'React',
     'Next.js',
     'Portfolio',
   ],
-  authors: [{ name: 'Amir Abdulkarim Jabbar' }],
+  authors: [{ name: 'Ameer Abdulkareem Jabbar Lami' }],
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     title,
     description,
-    siteName: 'amir.dev',
+    siteName: 'cv-ameer.vercel.app',
   },
   twitter: {
     card: 'summary_large_image',
@@ -48,9 +68,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${merienda.variable}`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+    >
+      <head>
+        {/* before first paint: mark JS on (for entrance guards) and apply the saved / system theme */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js');try{var t=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <SmoothScroll />
+        <ScrollProgress />
+        <Magnetic />
         <Cursor />
         <div
           aria-hidden="true"

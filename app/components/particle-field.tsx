@@ -12,7 +12,6 @@ type Particle = {
 
 const PARTICLE_COUNT = 60;
 const LINK_DIST = 120;
-const DOT_COLOR = '217, 119, 87'; // brand accent #D97757
 
 export default function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,7 +28,15 @@ export default function ParticleField() {
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // dots take the theme accent, re-read when the theme toggles
+    let color = '';
+    const readColor = () => {
+      color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#d97757';
+    };
+    readColor();
+    const themeObserver = new MutationObserver(readColor);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     let particles: Particle[] = [];
     let rafId = 0;
     const pointer = { x: -9999, y: -9999 };
@@ -68,8 +75,10 @@ export default function ParticleField() {
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${DOT_COLOR}, 0.55)`;
+        ctx.globalAlpha = 0.55;
+        ctx.fillStyle = color;
         ctx.fill();
+        ctx.globalAlpha = 1;
       }
     };
 
@@ -97,10 +106,11 @@ export default function ParticleField() {
 
         ctx.save();
         ctx.shadowBlur = 8;
-        ctx.shadowColor = `rgba(${DOT_COLOR}, 0.9)`;
+        ctx.shadowColor = color;
+        ctx.globalAlpha = 0.85;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${DOT_COLOR}, 0.85)`;
+        ctx.fillStyle = color;
         ctx.fill();
         ctx.restore();
       }
@@ -114,9 +124,11 @@ export default function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${DOT_COLOR}, ${0.18 * (1 - d / LINK_DIST)})`;
+            ctx.globalAlpha = 0.18 * (1 - d / LINK_DIST);
+            ctx.strokeStyle = color;
             ctx.lineWidth = 1;
             ctx.stroke();
+            ctx.globalAlpha = 1;
           }
         }
       }
@@ -144,6 +156,7 @@ export default function ParticleField() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      themeObserver.disconnect();
       window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerleave', onPointerLeave);
