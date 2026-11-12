@@ -44,7 +44,9 @@ export default function SplitReveal({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll(".split-word > span"),
-        { yPercent: 110, rotate: 4 },
+        // y: 0 — GSAP would otherwise adopt the CSS first-paint guard's translateY as a
+        // permanent base offset, leaving every word parked below its mask.
+        { y: 0, yPercent: 110, rotate: 4 },
         {
           yPercent: 0,
           rotate: 0,

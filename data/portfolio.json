@@ -27,11 +27,27 @@
   "skillGroups": [
     {
       "label": "Front-end",
-      "items": ["React.js", "Next.js", "Vue.js", "Redux Toolkit", "TanStack Query & Router", "Vite", "Framer Motion"]
+      "items": [
+        "React.js",
+        "Next.js",
+        "Vue.js",
+        "Redux Toolkit",
+        "TanStack Query & Router",
+        "Vite",
+        "Framer Motion"
+      ]
     },
     {
       "label": "Back-end",
-      "items": ["Node.js", "NestJS", "Express", "REST APIs", "WebSocket", "Prisma ORM", "Sequelize"]
+      "items": [
+        "Node.js",
+        "NestJS",
+        "Express",
+        "REST APIs",
+        "WebSocket",
+        "Prisma ORM",
+        "Sequelize"
+      ]
     },
     {
       "label": "Databases",
@@ -47,11 +63,26 @@
     },
     {
       "label": "Localization",
-      "items": ["RTL layouts", "i18n", "Arabic", "English", "Sorani", "Kurmanji"]
+      "items": [
+        "RTL layouts",
+        "i18n",
+        "Arabic",
+        "English",
+        "Sorani",
+        "Kurmanji"
+      ]
     },
     {
       "label": "Tools",
-      "items": ["Git & GitHub", "Docker", "nginx", "Mapbox GL", "Postman", "Swagger", "Apidog"]
+      "items": [
+        "Git & GitHub",
+        "Docker",
+        "nginx",
+        "Mapbox GL",
+        "Postman",
+        "Swagger",
+        "Apidog"
+      ]
     }
   ],
   "projects": [
