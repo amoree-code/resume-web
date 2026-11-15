@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,12 +26,18 @@ export default function SplitReveal({
   className,
   trigger = "scroll",
   delay = 0,
+  prefix,
+  label,
 }: {
   text: string;
   as?: "h1" | "h2" | "h3" | "p" | "span";
   className?: string;
   trigger?: "scroll" | "mount";
   delay?: number;
+  /** Static content rendered before the animated words, e.g. a name line inside the h1. */
+  prefix?: ReactNode;
+  /** Accessible name override when `prefix` adds words the plain text does not carry. */
+  label?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
   const tokens = tokenize(text);
@@ -65,7 +71,8 @@ export default function SplitReveal({
   }, [trigger, delay]);
 
   return (
-    <Tag ref={ref as never} className={className} aria-label={text.replaceAll("*", "")}>
+    <Tag ref={ref as never} className={className} aria-label={label ?? text.replaceAll("*", "")}>
+      {prefix}
       {tokens.map((t, i) => (
         <Fragment key={i}>
           <span className="split-word" aria-hidden="true">

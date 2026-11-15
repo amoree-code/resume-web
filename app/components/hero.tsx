@@ -3,6 +3,7 @@ import SplitReveal from './split-reveal';
 import CountUp from './count-up';
 import CvDownloadButton from './cv-download-button';
 import { CONTACT_LINKS } from '@/lib/contact';
+import { PERSON } from '@/lib/site';
 import type { Stat } from '@/lib/portfolio';
 
 const HERO_LINKS = CONTACT_LINKS.filter((l) => l.label !== 'Phone');
@@ -27,6 +28,12 @@ export default function Hero({ stats }: { stats: Stat[] }) {
           delay={0.1}
           className="hero-title"
           text="I build the dashboards *governments run on.*"
+          label={`${PERSON.name}, ${PERSON.shortTitle}: I build the dashboards governments run on.`}
+          prefix={
+            <span data-enter className="hero-name mono" aria-hidden="true">
+              {PERSON.name} · {PERSON.shortTitle}
+            </span>
+          }
         />
 
         <p data-enter className="lead hero-lead">

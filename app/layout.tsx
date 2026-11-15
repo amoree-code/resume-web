@@ -5,6 +5,7 @@ import ParticleField from './components/particle-field';
 import Cursor from './components/cursor';
 import ScrollProgress from './components/scroll-progress';
 import Magnetic from './components/magnetic';
+import { PERSON, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '@/lib/site';
 import './globals.css';
 
 const geist = Geist({
@@ -31,35 +32,41 @@ export const viewport: Viewport = {
   themeColor: '#1a181b',
 };
 
-const title = 'Ameer Abdulkareem Jabbar Lami — Front-end Developer';
-const description =
-  'Front-end-focused Full Stack Developer with 2 years of experience turning ideas and designs into clean, fast, dependable web products — from large-scale government dashboards to real-time SaaS used by hundreds of thousands.';
+// Search-console ownership tokens come from the environment (set in Vercel), never the repo.
+const verification: Metadata['verification'] = {
+  google: process.env.GOOGLE_SITE_VERIFICATION,
+  other: process.env.BING_SITE_VERIFICATION
+    ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION }
+    : undefined,
+};
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cv-ameer.vercel.app'),
-  title,
-  description,
-  keywords: [
-    'Ameer Abdulkareem Jabbar Lami',
-    'Front-end Developer',
-    'Full Stack Developer',
-    'React',
-    'Next.js',
-    'Portfolio',
-  ],
-  authors: [{ name: 'Ameer Abdulkareem Jabbar Lami' }],
-  robots: { index: true, follow: true },
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  applicationName: PERSON.name,
+  authors: [{ name: PERSON.name, url: SITE_URL }],
+  creator: PERSON.name,
+  alternates: { canonical: '/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
   openGraph: {
-    type: 'website',
-    title,
-    description,
-    siteName: 'cv-ameer.vercel.app',
+    type: 'profile',
+    url: '/',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: PERSON.name,
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title,
-    description,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
+  verification,
 };
 
 export default function RootLayout({
