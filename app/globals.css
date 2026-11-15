@@ -62,7 +62,8 @@ kbd {
   --text-lg: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
   --text-h3: clamp(1.45rem, 1.2rem + 1vw, 2rem);
   --text-h2: clamp(2.3rem, 1.6rem + 3vw, 4rem);
-  --text-h1: clamp(2.9rem, 1.6rem + 6vw, 7rem);
+  /* the svh term keeps a landscape phone's headline from filling the whole screen */
+  --text-h1: clamp(2.9rem, 1.6rem + min(6vw, 10svh), 7rem);
 
   /* fluid space */
   --gutter: clamp(16px, 4vw, 32px);
@@ -401,6 +402,7 @@ html.custom-cursor * {
 }
 .cursor-dot,
 .cursor-ring {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -421,6 +423,11 @@ html.custom-cursor * {
   margin: -16px 0 0 -16px;
   border: 1.5px solid var(--accent);
   transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, border-color 0.2s ease;
+}
+/* only drawn once cursor.tsx has confirmed a fine pointer; otherwise they'd sit at (0,0) */
+html.custom-cursor .cursor-dot,
+html.custom-cursor .cursor-ring {
+  display: block;
 }
 .cursor-ring.cursor-active {
   width: 24px;
@@ -723,16 +730,37 @@ html.custom-cursor * {
 }
 
 /* ---------- work ---------- */
+/* one-line strip; scrolls sideways on narrow screens instead of wrapping into a two-line blob */
 .work-filters {
   display: flex;
-  flex-wrap: wrap;
   gap: 4px;
-  padding: 4px;
+  max-width: 100%;
+  padding: 4px 28px 4px 4px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: color-mix(in oklch, var(--panel) 60%, transparent);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  /* scrollIntoView clears the fade. Physical, not scroll-padding-inline: Lightning CSS drops that shorthand */
+  scroll-padding-left: 4px;
+  scroll-padding-right: 28px;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+}
+.work-filters::-webkit-scrollbar {
+  display: none;
+}
+/* the full strip (~455px) fits from here: drop the fade and its end padding */
+@media (min-width: 520px) {
+  .work-filters {
+    padding: 4px;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 .work-filter {
+  flex: none;
   position: relative;
   min-height: 44px;
   padding: 0 16px;
@@ -1093,6 +1121,7 @@ html.custom-cursor * {
 .site-footer {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
   padding-block: 28px max(40px, env(safe-area-inset-bottom));
@@ -1101,6 +1130,9 @@ html.custom-cursor * {
   color: var(--faint);
 }
 .site-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--faint);
   text-decoration: none;
 }
