@@ -70,7 +70,11 @@ export default function Work({ projects }: { projects: Project[] }) {
               key={cat}
               type="button"
               aria-pressed={activeCategory === cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={(e) => {
+                setActiveCategory(cat);
+                // on phones the strip scrolls: bring a half-hidden filter fully into view
+                e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+              }}
               className="work-filter"
             >
               {activeCategory === cat && (
