@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: 'Design system — Ameer Abdulkareem Jabbar Lami',
   description: 'Tokens, type, motion and components behind the portfolio.',
   robots: { index: false, follow: false },
+  // own canonical, so the noindex page never claims to be a copy of the home page
+  alternates: { canonical: '/design' },
 };
 
 // Darkmatter (tweakcn) — see the note above :root in app/globals.css.

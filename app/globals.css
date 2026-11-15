@@ -542,6 +542,17 @@ html.custom-cursor .cursor-ring {
   margin: 0;
   max-width: 14ch;
 }
+/* name line inside the h1 — the page's identity for readers and crawlers alike */
+.hero-name {
+  display: block;
+  margin-block-end: clamp(14px, 2vw, 22px);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 .hero-lead {
   margin: 0;
 }

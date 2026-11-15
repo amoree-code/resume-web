@@ -11,41 +11,33 @@ import Education from './components/education';
 import Contact from './components/contact';
 import Footer from './components/footer';
 import { getPortfolioData } from '@/lib/portfolio';
-
-const personJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Ameer Abdulkareem Jabbar Lami',
-  jobTitle: 'Front-end Developer',
-  email: 'mailto:ameer.abdulkareem.lami@gmail.com',
-  telephone: '+9647777665783',
-  url: 'https://cv-ameer.vercel.app',
-  sameAs: ['https://github.com/amoree-code', 'https://www.linkedin.com/in/ameer-abdulkareem'],
-};
+import { buildJsonLd, serializeJsonLd } from '@/lib/structured-data';
 
 export default function Home() {
-  const { stats, skillGroups, services, projects, experience, education, spokenLanguages } =
-    getPortfolioData();
+  const data = getPortfolioData();
+  const { stats, skillGroups, services, projects, experience, education, spokenLanguages } = data;
 
   return (
     <div style={{ minHeight: '100svh', overflowX: 'clip' }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildJsonLd(data)) }}
       />
       <SectionIndicator />
       <Header />
-      <Hero stats={stats} />
-      <About services={services} />
-      <Languages skillGroups={skillGroups} />
-      <section className="container" style={{ paddingBottom: 'var(--section-y)' }}>
-        <Workspace />
-      </section>
-      <Marquee items={services.map((s) => s.title)} />
-      <Experience experience={experience} />
-      <Work projects={projects} />
-      <Education education={education} spokenLanguages={spokenLanguages} />
-      <Contact />
+      <main id="main">
+        <Hero stats={stats} />
+        <About services={services} />
+        <Languages skillGroups={skillGroups} />
+        <section className="container" style={{ paddingBottom: 'var(--section-y)' }}>
+          <Workspace />
+        </section>
+        <Marquee items={services.map((s) => s.title)} />
+        <Experience experience={experience} />
+        <Work projects={projects} />
+        <Education education={education} spokenLanguages={spokenLanguages} />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
